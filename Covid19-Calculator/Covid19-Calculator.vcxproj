@@ -138,8 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\fast-cpp-csv-parser\csv.h" />
     <ClInclude Include="Covid19calc.h" />
+    <ClInclude Include="csv.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

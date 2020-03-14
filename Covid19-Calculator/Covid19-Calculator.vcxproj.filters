@@ -18,8 +18,8 @@
     <ClInclude Include="Covid19calc.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\fast-cpp-csv-parser\csv.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="csv.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
