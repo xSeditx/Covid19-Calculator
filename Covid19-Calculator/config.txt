@@ -1,0 +1,2 @@
+Province/State,Country/Region,Latitude,Longitude
+New Jersey,US,40.298904,-74.521011

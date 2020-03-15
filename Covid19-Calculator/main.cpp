@@ -1,6 +1,9 @@
 #include"Covid19calc.h"
 
 
+std::mutex DEBUGMutex;
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 
 
 

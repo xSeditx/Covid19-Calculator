@@ -1,9 +1,13 @@
 #pragma once
+
+#include"Common.h"
 #include<string>
 #include<iostream>
-
+#include<unordered_map>
 #include"csv.h"
+
 #define Print(x)  std::cout << x << "\n"
+
 
 
 /* City State where Outbreak is taking place */
@@ -105,12 +109,11 @@ struct Date_t
         return result;
     }
 };
-std::string s = "scott>=tiger";
 
-
-
-
-
+struct Configuration
+{
+    Location_t User_Location;
+};
 
 /* Location / Confirmed Cases / Deaths / Recovered :  Date data*/
 struct Outbreak_info
@@ -138,8 +141,6 @@ struct Outbreak_info
     uint32_t   Recovered;
     Date_t     Date_Time;
 };
-
-
 
 
 class Pandemic_Map
@@ -197,13 +198,40 @@ public:
 
          }
 
-         Print("Total Deaths:    " << Total_Deaths);
-         Print("Total Infected:  " << Total_Infected);
-         Print("Total Recovered: " << Total_Recovered);
-         Mortality_Rate = (static_cast<float>(Total_Deaths)/ static_cast<float>(Total_Infected) ) * 100.0f;
-         Print("Mortality:       " << Mortality_Rate << "%");
+         ColorPrint(CON_Yellow, "Total Infected:  " << Total_Infected);
+         ColorPrint(CON_Green, "Total Recovered: " << Total_Recovered);
+         ColorPrint(CON_Red, "Total Deaths:    " << Total_Deaths);
+
+         Mortality_Rate = (static_cast<float>(Total_Deaths)/ static_cast<float>(Total_Infected) );
+         ColorPrint(CON_Red, "Mortality:       " << (Mortality_Rate * 100.f) << "%");
+
+         /* Figure up the amount of people that Recover for every one death*/
+         Print("\n");
+         float recov_death = (float)((Total_Recovered) / (Total_Deaths));
+         Print("Death/Recovery ratio: 1/" << recov_death);
+         Print("\n");
+
+         /* Figure up the amount of cases still to be seen */
+         Undetermined = Total_Infected - (Total_Deaths + Total_Recovered);
+         ColorPrint(CON_Yellow, "Undetermined: " << Undetermined);
+         ColorPrint(CON_Red, "~ Estimated Deaths:    " << Undetermined * Mortality_Rate );
+         ColorPrint(CON_Green, "~ Estimated Recoverys: " << Undetermined - (Undetermined * Mortality_Rate));
     }
+
+    float Undetermined;
+
+
+    
 };
+
+
+
+
+
+
+
+
+
 
 //  "Province / State",
 //  "Country / Region",
