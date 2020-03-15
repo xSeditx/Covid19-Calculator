@@ -112,8 +112,37 @@ struct Date_t
 
 struct Configuration
 {
+    Configuration(std::string _file)
+    {
+        io::CSVReader<4, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_file);
+        in.read_header
+        (
+            io::ignore_extra_column,/// io::ignore_no_column , ///
+            "Province/State",
+            "Country/Region",
+            "Latitude",
+            "Longitude"
+        );
+
+        std::string DateTimeIN;
+        std::string Long, Lat;
+
+        while (
+            in.read_row(
+                User_Location.Province,
+                User_Location.Region,
+                Long,
+                Lat))
+        {
+           // User_Location.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
+            User_Location.Longitude = std::stof(Long);
+            User_Location.Latitude = std::stof(Lat);
+        }
+    }
     Location_t User_Location;
 };
+extern Configuration Config;
+
 
 /* Location / Confirmed Cases / Deaths / Recovered :  Date data*/
 struct Outbreak_info
