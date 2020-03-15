@@ -141,8 +141,10 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Covid19calc.h" />
     <ClInclude Include="csv.h" />
+    <ClInclude Include="DailyCaseParser.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Covid19calc.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

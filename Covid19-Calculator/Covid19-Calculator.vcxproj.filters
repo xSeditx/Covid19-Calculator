@@ -24,9 +24,15 @@
     <ClInclude Include="Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="DailyCaseParser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Covid19calc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

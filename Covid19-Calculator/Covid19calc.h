@@ -33,6 +33,7 @@ struct Location_t
     float Latitude;
     float Longitude;
 };
+std::ostream& operator <<(std::ostream& _str, Location_t _place);
 
 /* Year / Day / Month : Time Data */
 struct Date_t
@@ -109,6 +110,8 @@ struct Date_t
         return result;
     }
 };
+std::ostream& operator <<(std::ostream& _str, Date_t _time);
+
 
 struct Configuration
 {
@@ -170,13 +173,14 @@ struct Outbreak_info
     uint32_t   Recovered;
     Date_t     Date_Time;
 };
+std::ostream& operator <<(std::ostream& _str, Outbreak_info _time);
 
 
 class Pandemic_Map
 {
 public:
     std::vector<Outbreak_info> Outbreak_List;
-    
+    std::unordered_map<std::string, std::vector<Outbreak_info>> Outbreak_Map;
     size_t Total_Deaths{ 0 };
     size_t Total_Infected{ 0 };
     size_t Total_Recovered{ 0 };
@@ -202,7 +206,8 @@ public:
         Outbreak_info Row_data;
 
         std::string DateTimeIN;
-        //float Long{ 0 }, Lat{ 0 };
+
+
         std::string Long, Lat;
          while (
              in.read_row(
@@ -215,15 +220,17 @@ public:
              Long,
              Lat))
          {
+
              Row_data.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
              Row_data.Place.Longitude = std::stof(Long);
              Row_data.Place.Latitude = std::stof(Lat);
              Outbreak_List.push_back(Row_data);
-             
 
              Total_Deaths += Row_data.Deaths;
              Total_Infected += Row_data.Confirmed;
              Total_Recovered += Row_data.Recovered;
+
+             Outbreak_Map[Row_data.Place.Province].push_back( Row_data);
 
          }
 
@@ -231,6 +238,7 @@ public:
          ColorPrint(CON_Green, "Total Recovered: " << Total_Recovered);
          ColorPrint(CON_Red, "Total Deaths:    " << Total_Deaths);
 
+         /* Find the Percentage of people who died so far */
          Mortality_Rate = (static_cast<float>(Total_Deaths)/ static_cast<float>(Total_Infected) );
          ColorPrint(CON_Red, "Mortality:       " << (Mortality_Rate * 100.f) << "%");
 
@@ -245,6 +253,21 @@ public:
          ColorPrint(CON_Yellow, "Undetermined: " << Undetermined);
          ColorPrint(CON_Red, "~ Estimated Deaths:    " << Undetermined * Mortality_Rate );
          ColorPrint(CON_Green, "~ Estimated Recoverys: " << Undetermined - (Undetermined * Mortality_Rate));
+
+         /* Checks the User Configuration file to see if there are Outbreaks in their Area */
+         if (Outbreak_Map.find(Config.User_Location.Province) != Outbreak_Map.end())
+         {// If there are outbreaks Report Each one 
+             Print("\n");
+             ColorPrint(CON_Red, "~WARNING~ Outbreak Detected in your area: ");
+             for(auto& O: Outbreak_Map[Config.User_Location.Province])
+             {
+                 Print("OUTBREAK INFORMATION: \n" << O);
+                 Print("Local Cases: " << O.Confirmed);
+                 Print("      Recovered: " << O.Recovered);
+                 Print("      Deaths: " << O.Deaths);
+             }
+          
+         }
     }
 
     float Undetermined;
