@@ -184,6 +184,8 @@ public:
     size_t Total_Deaths{ 0 };
     size_t Total_Infected{ 0 };
     size_t Total_Recovered{ 0 };
+    size_t Undetermined;
+
     float Mortality_Rate{ 0.0f };
 
 
@@ -231,71 +233,138 @@ public:
              Total_Recovered += Row_data.Recovered;
 
              Outbreak_Map[Row_data.Place.Province].push_back( Row_data);
-
          }
 
-         ColorPrint(CON_Yellow, "Total Infected:  " << Total_Infected);
-         ColorPrint(CON_Green, "Total Recovered: " << Total_Recovered);
-         ColorPrint(CON_Red, "Total Deaths:    " << Total_Deaths);
-
-         /* Find the Percentage of people who died so far */
-         Mortality_Rate = (static_cast<float>(Total_Deaths)/ static_cast<float>(Total_Infected) );
-         ColorPrint(CON_Red, "Mortality:       " << (Mortality_Rate * 100.f) << "%");
-
-         /* Figure up the amount of people that Recover for every one death*/
-         Print("\n");
-         float recov_death = (float)((Total_Recovered) / (Total_Deaths));
-         Print("Death/Recovery ratio: 1/" << recov_death);
-         Print("\n");
-
-         /* Figure up the amount of cases still to be seen */
-         Undetermined = Total_Infected - (Total_Deaths + Total_Recovered);
-         ColorPrint(CON_Yellow, "Undetermined: " << Undetermined);
-         ColorPrint(CON_Red, "~ Estimated Deaths:    " << Undetermined * Mortality_Rate );
-         ColorPrint(CON_Green, "~ Estimated Recoverys: " << Undetermined - (Undetermined * Mortality_Rate));
-
-         /* Checks the User Configuration file to see if there are Outbreaks in their Area */
-         if (Outbreak_Map.find(Config.User_Location.Province) != Outbreak_Map.end())
-         {// If there are outbreaks Report Each one 
-             Print("\n");
-             ColorPrint(CON_Red, "~WARNING~ Outbreak Detected in your area: ");
-             for(auto& O: Outbreak_Map[Config.User_Location.Province])
-             {
-                 Print("OUTBREAK INFORMATION: \n" << O);
-                 Print("Local Cases: " << O.Confirmed);
-                 Print("      Recovered: " << O.Recovered);
-                 Print("      Deaths: " << O.Deaths);
-             }
-          
-         }
     }
 
-    float Undetermined;
+    void display_Data()
+    {
+
+        ColorPrint(CON_Yellow, "Total Infected:  " << Total_Infected);
+        ColorPrint(CON_Green, "Total Recovered: " << Total_Recovered);
+        ColorPrint(CON_Red, "Total Deaths:    " << Total_Deaths);
+
+        /* Find the Percentage of people who died so far */
+        Mortality_Rate = (static_cast<float>(Total_Deaths) / static_cast<float>(Total_Infected));
+        ColorPrint(CON_Red, "Mortality:       " << (Mortality_Rate * 100.f) << "%");
+
+        /* Figure up the amount of people that Recover for every one death*/
+        Print("\n");
+        float recov_death = (float)((Total_Recovered) / (Total_Deaths));
+        Print("Death/Recovery ratio: 1/" << recov_death);
+        Print("\n");
+
+        /* Figure up the amount of cases still to be seen */
+        Undetermined = Total_Infected - (Total_Deaths + Total_Recovered);
+        ColorPrint(CON_Yellow, "Undetermined: " << Undetermined);
+        ColorPrint(CON_Red, "~ Estimated Deaths:    " << Undetermined * Mortality_Rate);
+        ColorPrint(CON_Green, "~ Estimated Recoverys: " << Undetermined - (Undetermined * Mortality_Rate));
+
+       // is_Local_Outbreaks(Config.User_Location.Province);
+    }
 
 
-    
+    bool is_Local_Outbreaks(std::string _location)
+    {
+
+        std::vector<Outbreak_info> result = search_Place(_location);
+        Print("Number of Local Outbreaks: " << result.size());
+
+        for (auto& O : result)
+        {
+            Print("OUTBREAK INFORMATION: \n" << O);
+            Print("Local Cases: " << O.Confirmed);
+            Print("      Recovered: " << O.Recovered);
+            Print("      Deaths: " << O.Deaths);
+        }
+
+        return false;
+    }
+
+
+    std::vector<Outbreak_info> search_Place(std::string _location)
+    {
+        std::vector<Outbreak_info> result;
+        /* Checks the User Configuration file to see if there are Outbreaks in their Area */
+        if (Outbreak_Map.find(_location) != Outbreak_Map.end())
+        {// If there are outbreaks Report Each one 
+            for (auto& O : Outbreak_Map[_location])
+            {
+                result.push_back(O);
+            }
+        }
+        /* Double checks the Region to see if the User ment that instead */
+        for (auto& O : Outbreak_Map)
+        {
+            for (auto& C : O.second)
+            {
+                if (C.Place.Region == _location)
+                {
+                    result.push_back(C);
+                }
+            }
+        }
+        
+        // Make sure we do not double the data in the following test
+        if (result.size())return result; 
+
+
+        // If all of the above Fails we start string manipulation to see if user possibly entered incorrect Capitalization or Spacing
+        // std::for_each(_location.begin(), _location.end(), [](char & c) { c = ::toupper(c); });
+        std::string UcaseInput = _location;
+        std::for_each(UcaseInput.begin(), UcaseInput.end(), [](char & c) { c = ::toupper(c); });
+        removeSpaces(UcaseInput);
+
+        /* Double checks the Region to see if the User ment that instead */
+        for (auto& O : Outbreak_Map)
+        {
+            for (auto& C : O.second)
+            {
+               
+                std::string UcaseProv = C.Place.Province;
+                std::for_each(UcaseProv.begin(), UcaseProv.end(), [](char & c) { c = ::toupper(c); });
+
+
+                std::string UcaseRegion = C.Place.Region;
+                std::for_each(UcaseRegion.begin(), UcaseRegion.end(), [](char & c) { c = ::toupper(c); });
+
+                removeSpaces(UcaseRegion);
+                removeSpaces(UcaseProv);
+
+                // We have to take a substring the size of the Input key because for whatever reason removeSpaces is returning extra characters
+                // I have to make a better way to remove space because the /0 char is being added at the position where the amount of spaces are
+                if (UcaseProv == (UcaseInput.substr(0, UcaseProv.size())))
+                {// The Province equals user input
+                    result.push_back(C);
+                }
+                if (UcaseRegion == (UcaseInput.substr(0, UcaseRegion.size())))
+                {// The Region Matches user input
+                    result.push_back(C);
+                }
+             }
+
+        }
+
+
+
+        return result;
+    }
+    private:
+        void removeSpaces(std::string& _str)
+        {
+            int count = 0;
+            int numSpaces = 0;
+            for (int i = 0; _str[i]; i++)
+            {
+                if (_str[i] != ' ')
+                {
+                    _str[count++] = _str[i];
+                    ++numSpaces;
+                }
+            }
+            _str[count - numSpaces] = '\0';
+        }
 };
-
-
-
-
-
-
-
-
-
-
-//  "Province / State",
-//  "Country / Region",
-//  "Last Update"     ,
-//  "Confirmed"	      ,
-//  "Deaths"          ,
-//  "Recovered"	      ,
-//  "Latitude"        ,
-//  "Longitude"       ,
-
-//Province / State	Country / Region	Last Update	Confirmed	Deaths	Recovered	Latitude	Longitude
-
 
 
 
@@ -303,7 +372,8 @@ public:
 /*                                                 NOTES: 
 /* ======================================================================================================================
 /* 
-/* 
+-- WINDOWS API for getting User Location
+/* https://docs.microsoft.com/en-us/uwp/api/windows.devices.geolocation.basicgeoposition
 /* 
 -- 2019 Novel Coronavirus COVID - 19 (2019 - nCoV) Data Repository by Johns Hopkins CSSE
 /* https://github.com/CSSEGISandData/COVID-19

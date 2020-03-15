@@ -40,12 +40,79 @@ std::ostream& operator <<(std::ostream& _str, Outbreak_info _time)
                                   TRASH
    =============================================================================================================
 
+
+
+         //Print("OUTBREAK INFORMATION: \n" << O);
+         //Print("Local Cases: " << O.Confirmed);
+         //Print("      Recovered: " << O.Recovered);
+         //Print("      Deaths: " << O.Deaths);
+
+
+        /* Checks the User Configuration file to see if there are Outbreaks in their Area 
+        //if (Outbreak_Map.find(_location) != Outbreak_Map.end())
+        //{// If there are outbreaks Report Each one 
+        //    Print("\n");
+        //    ColorPrint(CON_Red, "~WARNING~ Outbreak Detected in your area: ");
+        //    for (auto& O : Outbreak_Map[Config.User_Location.Province])
+        //    {
+        //        Print("OUTBREAK INFORMATION: \n" << O);
+        //        Print("Local Cases: " << O.Confirmed);
+        //        Print("      Recovered: " << O.Recovered);
+        //        Print("      Deaths: " << O.Deaths);
+        //    }
+        //    return true;
+        //}
+
+        //for (auto& O : Outbreak_Map)
+        //{
+        //    for (auto& C : O.second)
+        //    {
+        //        if (C.Place.Region == _location)
+        //        {
+        //            Print("Area Found");
+        //        }
+        //    }
+        //}
+
+                Print("Map Ascii");
+                for (auto& L : UcaseRegion) Print((int)L);
+                Print("User Ascii");
+                for (auto& L : UcaseInput) Print((int)L);
+
+
+//    Print("OUTBREAK INFORMATION: \n" << O);
+// Print("Local Cases: " << O.Confirmed);
+// Print("      Recovered: " << O.Recovered);
+// Print("      Deaths: " << O.Deaths);
+
+
 // _str << "Year   :" << _time.Year << "\n";
 // _str << "Month  :" << _time.Month << "\n";
 // _str << "Day    :" << _time.Day << "\n";
 // _str << "Hours  :" << _time.Time.Hours << "\n";
 // _str << "Minute :" << _time.Time.Minute << "\n";
 // _str << "Seconds:" << _time.Time.Seconds << "\n";
+
+
+
+
+
+
+
+
+
+
+//  "Province / State",
+//  "Country / Region",
+//  "Last Update"     ,
+//  "Confirmed"	      ,
+//  "Deaths"          ,
+//  "Recovered"	      ,
+//  "Latitude"        ,
+//  "Longitude"       ,
+
+//Province / State	Country / Region	Last Update	Confirmed	Deaths	Recovered	Latitude	Longitude
+
 
 
 

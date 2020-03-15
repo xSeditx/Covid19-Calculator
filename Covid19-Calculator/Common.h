@@ -4,6 +4,9 @@
 #include<Windows.h>
 #include<mutex>
 
+#define DISABLED_WARNINGS 4244 4267
+#pragma warning(disable: DISABLED_WARNINGS)
+
 #define CON_DarkBlue 1
 #define CON_DarkGreen 2
 #define CON_Darkteal 3
