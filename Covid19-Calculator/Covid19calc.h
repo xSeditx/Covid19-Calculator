@@ -1,7 +1,10 @@
 #pragma once
 #include<string>
+#include<iostream>
 
 #include"csv.h"
+#define Print(x)  std::cout << x << "\n"
+
 
 /* City State where Outbreak is taking place */
 struct Location_t
@@ -143,20 +146,16 @@ class Pandemic_Map
 {
 public:
     std::vector<Outbreak_info> Outbreak_List;
-     
+    
+    size_t Total_Deaths{ 0 };
+    size_t Total_Infected{ 0 };
+    size_t Total_Recovered{ 0 };
+    float Mortality_Rate{ 0.0f };
+
 
     void load_OutbreakData(std::string _filename)
     {
-
-        // template<
-        //     unsigned column_count,
-        //     class trim_policy = trim_chars<' ', '\t'>,
-        //     class quote_policy = no_quote_escape<','>,
-        //     class overflow_policy = throw_on_overflow,
-        //     class comment_policy = no_comment
-        // >
-            
-        io::CSVReader<8, io::trim_chars<' ', '\t'>, io::no_quote_escape<','>> in("Cases.csv");
+        io::CSVReader<8, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in("Cases.csv");
         in.read_header
         (
            io::ignore_extra_column,/// io::ignore_no_column , ///
@@ -173,7 +172,8 @@ public:
         Outbreak_info Row_data;
 
         std::string DateTimeIN;
-        float Long{ 0 }, Lat{ 0 };
+        //float Long{ 0 }, Lat{ 0 };
+        std::string Long, Lat;
          while (
              in.read_row(
              Row_data.Place.Province,
@@ -186,9 +186,22 @@ public:
              Lat))
          {
              Row_data.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
+             Row_data.Place.Longitude = std::stof(Long);
+             Row_data.Place.Latitude = std::stof(Lat);
              Outbreak_List.push_back(Row_data);
-             // do stuff with the data
+             
+
+             Total_Deaths += Row_data.Deaths;
+             Total_Infected += Row_data.Confirmed;
+             Total_Recovered += Row_data.Recovered;
+
          }
+
+         Print("Total Deaths:    " << Total_Deaths);
+         Print("Total Infected:  " << Total_Infected);
+         Print("Total Recovered: " << Total_Recovered);
+         Mortality_Rate = (static_cast<float>(Total_Deaths)/ static_cast<float>(Total_Infected) ) * 100.0f;
+         Print("Mortality:       " << Mortality_Rate << "%");
     }
 };
 
