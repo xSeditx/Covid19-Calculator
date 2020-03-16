@@ -15,4 +15,14 @@ struct Parser
 
         std::string deliminator = ",";
     }
+
+    std::vector<std::string> load_Header(std::string _file)
+    {
+
+    }
 };
+
+//
+//http://freerangestats.info/blog/2016/02/06/world-health-organization
+// CDC Javascript API/
+//file:///C:/Users/Sedit/Downloads/API_User_Guide.pdf
