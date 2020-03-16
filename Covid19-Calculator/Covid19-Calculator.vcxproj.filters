@@ -27,6 +27,12 @@
     <ClInclude Include="DailyCaseParser.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="FileHandling.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorHandling.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

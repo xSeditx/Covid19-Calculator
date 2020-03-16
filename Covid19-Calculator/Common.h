@@ -3,6 +3,9 @@
 #define NOMINMAX
 #include<Windows.h>
 #include<mutex>
+#include<string>
+#include<iostream>
+#include<unordered_map>
 
 #define DISABLED_WARNINGS 4244 4267
 #pragma warning(disable: DISABLED_WARNINGS)

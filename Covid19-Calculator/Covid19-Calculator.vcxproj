@@ -143,6 +143,8 @@
     <ClInclude Include="Covid19calc.h" />
     <ClInclude Include="csv.h" />
     <ClInclude Include="DailyCaseParser.h" />
+    <ClInclude Include="ErrorHandling.h" />
+    <ClInclude Include="FileHandling.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Covid19calc.cpp" />
