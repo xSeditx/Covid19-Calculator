@@ -15,6 +15,16 @@ Configuration Config("Config.txt");
  
 namespace fs = std::filesystem;
 
+_static Error_t ErrorHandler::CurrentError;
+std::string ErrorString[] =
+{
+    "No Errors",
+    "File Not Found",
+    "To many Colmns in CSV file"
+};
+
+
+
 int main()
 {
     std::vector<std::string> Filenames;
@@ -28,6 +38,9 @@ int main()
         }
         
     }
+
+    Parser Parse("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
+
 
     Pandemic_Map Total_Pandemic;
     Total_Pandemic.Retrieve_All_Filenames();

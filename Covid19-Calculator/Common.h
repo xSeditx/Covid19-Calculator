@@ -7,6 +7,8 @@
 #include<iostream>
 #include<unordered_map>
 
+#include"ErrorHandling.h"
+
 #define DISABLED_WARNINGS 4244 4267
 #pragma warning(disable: DISABLED_WARNINGS)
 
@@ -31,12 +33,22 @@ extern std::mutex DEBUGMutex;
 
 #define SetColor(x) SetConsoleTextAttribute(hConsole, x)
 
+#define Print(x)  std::cout <<  x << "\n"
+
 #ifdef _DEBUG
 #    define ColorPrint(col, x) { SetColor(col);\
-                                 std::cout <<  x << "\n";\
+                                 Print(x);\
                                  SetColor(7);}
 #else
 #    define DEBUGPrint(col,x)
 #endif 
 
 //  std::thread::id CurrentThread = std::this_thread::get_id();\
+
+
+
+#define ERROR_LOG(x, err)   ColorPrint(CON_Red, x); ErrorHandler::CurrentError = err;
+
+
+
+#define _static 

@@ -7,13 +7,7 @@ enum Error_t
     file_NotFound,
     Extra_column_found
 };
-std::string ErrorString[] =
-{
-    "No Errors",
-    "File Not Found",
-    "To many Colmns in CSV file"
-};
-
+extern std::string ErrorString[];
 struct ErrorHandler
 {
 
@@ -30,5 +24,5 @@ struct ErrorHandler
     {
         return !(CurrentError == No_Error);
     }
-    Error_t CurrentError;
+    static Error_t CurrentError;
 };
