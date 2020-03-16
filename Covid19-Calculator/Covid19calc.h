@@ -217,7 +217,7 @@ struct Outbreak_info
 std::ostream& operator <<(std::ostream& _str, Outbreak_info _time);
 
 
-class Pandemic_Map
+class Epidemic_Map
 {
 public:
     std::vector<Outbreak_info> Outbreak_List;
@@ -229,7 +229,9 @@ public:
 
     float Mortality_Rate{ 0.0f };
 
-    void load_OutbreakData(std::string _filename);
+    void load_Archived_OutbreakData(std::string _filename);
+    void load_Daily_OutbreakData(std::string _filename);
+    void load_TimeSeries_OutbreakData(std::string _filename);
 
 
     void display_Data();
@@ -255,6 +257,69 @@ public:
             _str[count] = '\0';
         }
 };
+
+
+#include <filesystem>
+namespace fs = std::filesystem;
+
+class Pandemic_Map
+{ 
+public:
+
+    /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\csse_covid_19_data\csse_covid_19_daily_reports */
+    std::vector<Epidemic_Map> Daily_Reports;
+    std::vector<std::string> DailyReport_files;
+    void load_All_DailyReports();
+
+    /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\archived_data */
+    std::vector<Epidemic_Map> Archived_Data;
+    std::vector<std::string> ArchivedData_files;
+    void load_All_Archived();
+
+    /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\csse_covid_19_data\csse_covid_19_time_series */
+    std::vector<Epidemic_Map> Time_Series;
+    std::vector<std::string>  TimeSeries_files;
+    void load_All_TimeSeries();
+    /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\who_covid_19_situation_reports\who_covid_19_sit_rep_time_series */
+
+    void Retrieve_All_Filenames()
+    {
+        std::string path = "COVID-19/archived_data/archived_daily_case_updates/";
+        for (const auto & entry : fs::directory_iterator(path))
+        {
+            auto P = fs::path(entry.path()).extension();
+            if (entry.path().extension() == ".csv")
+            {
+                ArchivedData_files.push_back(entry.path().string());
+            }
+        }
+
+
+        path = "COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/";
+        for (const auto & entry : fs::directory_iterator(path))
+        {
+            auto P = fs::path(entry.path()).extension();
+            if (entry.path().extension() == ".csv")
+            {
+                TimeSeries_files.push_back(entry.path().string());
+            }
+        }
+
+
+        path = "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/";
+        for (const auto & entry : fs::directory_iterator(path))
+        {
+            auto P = fs::path(entry.path()).extension();
+            if (entry.path().extension() == ".csv")
+            {
+                DailyReport_files.push_back(entry.path().string());
+            }
+        }
+    }
+};
+
+
+
 
 
 

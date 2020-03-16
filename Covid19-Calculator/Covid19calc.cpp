@@ -1,6 +1,6 @@
 #include"Covid19calc.h"
 
-void Pandemic_Map::display_Data()
+void Epidemic_Map::display_Data()
 {
 
     ColorPrint(CON_Yellow, "Total Infected:  " << Total_Infected);
@@ -25,8 +25,7 @@ void Pandemic_Map::display_Data()
 
     // is_Local_Outbreaks(Config.User_Location.Province);
 }
-
-void Pandemic_Map::load_OutbreakData(std::string _filename)
+void Epidemic_Map::load_Archived_OutbreakData(std::string _filename)
 {
 
     io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_filename);// "Cases.csv");
@@ -67,8 +66,117 @@ void Pandemic_Map::load_OutbreakData(std::string _filename)
         Outbreak_Map[Row_data.Place.Province].push_back(Row_data);
     }
 }
+void Epidemic_Map::load_Daily_OutbreakData(std::string _filename)
+{
+    try {
+        io::CSVReader<8, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_filename);
+        in.read_header
+        (
+            io::ignore_extra_column,
+            "Province/State",
+            "Country/Region",
+            "Last Update",
+            "Confirmed",
+            "Deaths",
+            "Recovered",
+            "Latitude",
+            "Longitude"
+        );
 
-bool Pandemic_Map::is_Local_Outbreaks(std::string _location)
+        Outbreak_info Row_data;
+        std::string DateTimeIN;
+        std::string Long, Lat;
+
+        while (
+            in.read_row(
+                Row_data.Place.Province,
+                Row_data.Place.Region,
+                DateTimeIN,
+                Row_data.Confirmed,
+                Row_data.Deaths,
+                Row_data.Recovered,
+                Lat,
+                Long
+            ))
+        {
+
+            Row_data.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
+
+            try
+            {
+                Row_data.Place.Latitude = std::stof(Lat);
+                Row_data.Place.Longitude = std::stof(Long);
+            }
+            catch (...)
+            {// If stof fails due to poorly implemented data
+                Row_data.Place.Latitude = 0;
+                Row_data.Place.Longitude = 0;
+            }
+
+            Outbreak_List.push_back(Row_data);
+
+            Total_Deaths += Row_data.Deaths;
+            Total_Infected += Row_data.Confirmed;
+            Total_Recovered += Row_data.Recovered;
+
+            Outbreak_Map[Row_data.Place.Province].push_back(Row_data);
+        }
+
+    }
+    catch (...)
+    {// If the Above Fails which it will for the first Month of Data use the following which excludes Long and Lat data
+        io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_filename);
+        in.read_header
+        (
+            io::ignore_extra_column,
+            "Province/State",
+            "Country/Region",
+            "Last Update",
+            "Confirmed",
+            "Deaths",
+            "Recovered"
+        );
+        Outbreak_info Row_data;
+        std::string DateTimeIN;
+        std::string Long, Lat;
+
+        while (
+            in.read_row(
+                Row_data.Place.Province,
+                Row_data.Place.Region,
+                DateTimeIN,
+                Row_data.Confirmed,
+                Row_data.Deaths,
+                Row_data.Recovered
+            ))
+        {
+
+            Row_data.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
+            Row_data.Place.Latitude = 0;
+            Row_data.Place.Longitude = 0;
+
+            Outbreak_List.push_back(Row_data);
+
+            Total_Deaths += Row_data.Deaths;
+            Total_Infected += Row_data.Confirmed;
+            Total_Recovered += Row_data.Recovered;
+
+            Outbreak_Map[Row_data.Place.Province].push_back(Row_data);
+        }
+
+    }
+
+}
+void Epidemic_Map::load_TimeSeries_OutbreakData(std::string _filename)
+{
+    
+}
+
+
+
+
+
+bool Epidemic_Map::is_Local_Outbreaks(std::string _location)
 {
 
     std::vector<Outbreak_info> result = search_Place(_location);
@@ -87,7 +195,8 @@ bool Pandemic_Map::is_Local_Outbreaks(std::string _location)
     return false;
 }
 
-std::vector<Outbreak_info> Pandemic_Map::search_Place(std::string _location)
+std::vector<Outbreak_info>
+    Epidemic_Map::search_Place(std::string _location)
 {
     std::vector<Outbreak_info> result;
     /* Checks the User Configuration file to see if there are Outbreaks in their Area */
@@ -154,8 +263,48 @@ std::vector<Outbreak_info> Pandemic_Map::search_Place(std::string _location)
                 }
             }
         }
-
     }
+
+    // If that STILL does not work we are going to attempt to find the users input as a Substring to the Region or Province
+    if (result.size())return result;
+
+
+    /* Tripple checks the Region and Province to see if the User gave a substring of the area */
+    for (auto& O : Outbreak_Map)
+    {
+        for (auto& C : O.second)
+        {
+
+            std::string UcaseProv = C.Place.Province;
+            std::for_each(UcaseProv.begin(), UcaseProv.end(), [](char & c) { c = ::toupper(c); });
+
+            std::string UcaseRegion = C.Place.Region;
+            std::for_each(UcaseRegion.begin(), UcaseRegion.end(), [](char & c) { c = ::toupper(c); });
+
+            removeSpaces(UcaseRegion);
+            removeSpaces(UcaseProv);
+
+            // We have to take a substring the size of the Input key because for whatever reason removeSpaces is returning extra characters
+            // I have to make a better way to remove space because the /0 char is being added at the position where the amount of spaces are
+            if (UcaseProv.size())
+            {// Only check if Province Field Exist
+                if (UcaseProv.find(UcaseInput) != std::string::npos)
+                {// The Province equals user input
+                    result.push_back(C);
+                }
+            }
+
+            if (UcaseRegion.size())
+            {// Only Check if Region Field Exist
+                if (UcaseRegion.find(UcaseInput) != std::string::npos)
+                {// The Region Matches user input
+                    result.push_back(C);
+                }
+            }
+        }
+    }
+
+
     return result;
 }
 
@@ -164,8 +313,35 @@ std::vector<Outbreak_info> Pandemic_Map::search_Place(std::string _location)
 
 
 
+void Pandemic_Map::load_All_Archived()
+{
+    for (auto& File : ArchivedData_files)
+    {
+        Epidemic_Map Epidemic;
+        Epidemic.load_Archived_OutbreakData(File);
+        Archived_Data.emplace_back(Epidemic);
+    }
+}
 
 
+void Pandemic_Map::load_All_DailyReports()
+{
+    for (auto& File : DailyReport_files)
+    {
+        Epidemic_Map Epidemic;
+        Epidemic.load_Daily_OutbreakData(File);
+        Daily_Reports.emplace_back(Epidemic);
+    }
+}
+void Pandemic_Map::load_All_TimeSeries()
+{
+    for (auto& File : TimeSeries_files)
+    {
+        Epidemic_Map Epidemic;
+        Epidemic.load_TimeSeries_OutbreakData(File);
+        Time_Series.emplace_back(Epidemic);
+    }
+}
 
 
 
