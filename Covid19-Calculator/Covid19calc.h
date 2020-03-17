@@ -29,6 +29,10 @@ struct Location_t
     std::string Region;
     float Latitude;
     float Longitude;
+
+
+    bool has_Province() { return (Province == "" || Province == " "); }
+    bool has_Region()   { return (  Region == "" ||   Region == " "); }
 };
 std::ostream& operator <<(std::ostream& _str, Location_t _place);
 
@@ -260,6 +264,17 @@ public:
         }
 };
 
+
+
+/* Single Instance of a Daily Case Update */
+struct Daily_Case
+{
+    Location_t Place;
+    size_t Confirmed;
+    size_t Deaths;
+    size_t Recovered;
+};
+
 /* Mapping Specific locations Daily as new cases Emerge */
 struct Daily_Update
 {
@@ -269,6 +284,8 @@ struct Daily_Update
      std::unordered_map<std::string, uint32_t> Location_Total;
      std::vector< Location_t> Places;
      std::vector<std::pair<Date_t, uint32_t>> Cases;
+
+     std::unordered_map< std::string, Daily_Case> Case_Map;
 };
 
 /* Total Pandemic as a whole and all the data I have managed to parse so far */
@@ -314,7 +331,7 @@ public:
                 TimeSeries_files.push_back(entry.path().string());
             }
         }
-
+        Time_Series.back().Case_Map[""];
 
         path = "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/";
         for (const auto & entry : fs::directory_iterator(path))

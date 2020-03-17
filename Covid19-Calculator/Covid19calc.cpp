@@ -295,8 +295,6 @@ std::vector<Outbreak_info>
             }
         }
     }
-
-
     return result;
 }
 

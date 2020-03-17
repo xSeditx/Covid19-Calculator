@@ -19,6 +19,14 @@ Source: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
 
 
 
+<hr>
+## Structure and DNA of Covid
+<hr>
+
+ _Coronavirus genome structure and replication_
+Source: https://www.ncbi.nlm.nih.gov/pubmed/15609507
+
+
 
 
 <hr>
@@ -46,6 +54,17 @@ Source: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
 Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-cytokine-storm-syndrome
 
 
+
+
+ _COVID19, PNEUMONIA & INFLAMMASOMES THE MELATONIN CONNECTION_
+ ```
+ Melatonine has been shown to quite Cytokin Storms
+ ```
+Source: https://www.evolutamente.it/covid-19-pneumonia-inflammasomes-the-melatonin-connection/?fbclid=IwAR1Dxbeh_WFlKF6Y4jQmaMeEuorIRQtEr1LjUlhv48BMHszyMElJTZ_PHjg
+
+
+
+
 <hr>
 
 ## ACE-2 Receptor Related articles and Links
@@ -68,23 +87,23 @@ Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-
 ```
 Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1287568/
 <hr>
-[1]:_Coronaviridae: the viruses and their replication_ <br>
+[1]: _Coronaviridae: the viruses and their replication_ <br>
 Holmes, K. V., and M. M. C. Lai. 1996. p. 1075-1093. In B. N. Fields, D. M. Knipe, and P. M. Howley (ed.), Fields virology, 3rd ed. Lippincott-Raven Publishers, Philadelphia, Pa.<br>
 
-[2]:_Coronavirus infection in acute lower respiratory tract disease of infants._                                                                              <br>
+[2]: _Coronavirus infection in acute lower respiratory tract disease of infants._                                                                             <br>
 McIntosh, K., R. K. Chao, H. E. Krause, R. Wasil, H. E. Mocega, and M. A. Mufson. 1974.  J. Infect. Dis. 130:502-507.                                         <br>
-                                                                                                                                                              <br>
+
 [3]: _van der Hoek L, Pyrc K, Jebbink MF, Vermeulen-Oost W, Berkhout RJ, Wolthers KC, Wertheim-van Dillen PM, Kaandorp J, Spaargaren J, Berkhout B_           <br>
 Nat Med. 2004 Apr; 10(4):368-73.                                                                                                                              <br>
-                                                                                                                                                              <br>
+
 [4]: _Characterization and complete genome sequence of a novel coronavirus, coronavirus HKU1, from patients with pneumonia._ <br>                             <br>
 Woo PC, Lau SK, Chu CM, Chan KH, Tsoi HW, Huang Y, Wong BH, Poon RW, Cai JJ, Luk WK, Poon LL, Wong SS, Guan Y, Peiris JS, Yuen KY                             <br>
 J Virol. 2005 Jan; 79(2):884-95.                                                                                                                              <br>
-                                                                                                                                                              <br>
+
 [5]: _Angiotensin-converting enzyme 2 is a functional receptor for the SARS coronavirus._                                                                     <br>
 Li W, Moore MJ, Vasilieva N, Sui J, Wong SK, Berne MA, Somasundaran M, Sullivan JL, Luzuriaga K, Greenough TC, Choe H, Farzan M                               <br>
 Nature. 2003 Nov 27; 426(6965):450-4.                                                                                                                         <br>
-                                                                                                                                                              <br>
+
 [6]: _Human coronavirus NL63 employs the severe acute respiratory syndrome coronavirus receptor for cellular entry._                                          <br>
 Hofmann H, Pyrc K, van der Hoek L, Geier M, Berkhout B, Pöhlmann S                                                                                            <br>
 Proc Natl Acad Sci U S A. 2005 May 31; 102(22):7988-93.                                                                                                       <br>

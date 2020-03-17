@@ -80,17 +80,8 @@ int main()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+// COVID-19 coronavirus spike holds infectivity details
+// https://newsroom.uw.edu/news/covid-19-coronavirus-spike-holds-infectivity-details
 
 
 
