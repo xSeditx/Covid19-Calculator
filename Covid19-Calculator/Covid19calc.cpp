@@ -349,13 +349,12 @@ void Pandemic_Map::load_All_TimeSeries()
 std::ostream& operator <<(std::ostream& _str, Location_t _place)
 {
     _str << "Location:  " << _place.Province << " - " << _place.Region <<"\n";
-  //  _str << "Region:    " << _place.Region << "\n";
     _str << "Latitude:  " << _place.Latitude << " - ";
     _str << "Longitude: " << _place.Longitude << "\n";
     return _str;
 }
 std::ostream& operator <<(std::ostream& _str, Date_t _time)
-{//TODO: Format this better in the Near Future
+{
     _str << _time.Year << "-" << _time.Month << "-" << _time.Day << " [T]: " << _time.Time.Hours << ":" << _time.Time.Minute << ":" << _time.Time.Seconds <<"\n";
     return _str;
 }

@@ -142,14 +142,15 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Covid19calc.h" />
     <ClInclude Include="csv.h" />
-    <ClInclude Include="DailyCaseParser.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="FileHandling.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Covid19calc.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Parser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Notes\ReadMe.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

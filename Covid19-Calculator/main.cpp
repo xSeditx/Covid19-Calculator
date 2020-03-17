@@ -1,6 +1,5 @@
 #include"Covid19calc.h"
-#include"DailyCaseParser.h"
-
+ 
 std::mutex DEBUGMutex;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -24,6 +23,8 @@ std::string ErrorString[] =
 };
 
 
+#include"FileHandling.h"
+
 
 int main()
 {
@@ -39,7 +40,8 @@ int main()
         
     }
 
-    Parser Parse("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
+    CSV_Parser Fi = CSV_Parser("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
+   // Parser Parse("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
 
 
     Pandemic_Map Total_Pandemic;
@@ -63,21 +65,26 @@ int main()
     {
         A.display_Data();
     }
-    std::string str;
-    std::cout << "Please enter your Location: \n";
-    std::getline(std::cin, str);
-    std::cout << "Outbreak Information for " << str << "\n";
-       
-    if (AllMap.back().is_Local_Outbreaks(str))
+    bool Running{ true };
+    while (Running)
     {
-        for (auto& P : AllMap.back().search_Place(str))
+        std::string str;
+        std::cout << "Please enter your Location: \n";
+        std::getline(std::cin, str);
+        if (str == "end") Running = false;
+        std::cout << "Outbreak Information for " << str << "\n";
+
+        if (AllMap.back().is_Local_Outbreaks(str))
         {
-            Print(P);
+            for (auto& P : AllMap.back().search_Place(str))
+            {
+                Print(P);
+            }
         }
-    }
-    else
-    {
-        Print("No Outbreaks found. Either check spelling of entered location or area is currently clear ");
+        else
+        {
+            Print("No Outbreaks found. Either check spelling of entered location or area is currently clear ");
+        }
     }
     return 0;
 }

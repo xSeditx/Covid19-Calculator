@@ -24,9 +24,6 @@
     <ClInclude Include="Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="DailyCaseParser.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileHandling.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -41,8 +38,10 @@
     <ClCompile Include="Covid19calc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Notes\ReadMe.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
