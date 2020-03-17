@@ -25,7 +25,6 @@
  The cells with perforin deficiencies “spent five times longer engaged” and released a flurry of cytokines, even though their lack of perforin made them incapable of destroying their target cell. 
 
 ```
-
 Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-cytokine-storm-syndrome
 
 
@@ -38,35 +37,41 @@ Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-
 
 ### ACE2 Receptor Expression and Severe Acute Respiratory Syndrome Coronavirus Infection Depend on Differentiation of Human Airway Epithelia
 ```
-Two previously recognized human coronaviruses (HCoV-OC43 and HCoV-229E) cause ∼30% of upper respiratory tract infections [1, 2]...
+ Two previously recognized human coronaviruses (HCoV-OC43 and HCoV-229E) cause ∼30% of upper respiratory tract infections [1, 2]...
+
  Recently, two additional human coronaviruses, HCoV-NL63 [3] and HKU1 [4], were identified in association with bronchiolitis and pneumonia, respectively...
 
  Recently, angiotensin converting enzyme 2 (ACE2) was identified as a receptor for both SARS-CoV (5) and NL63 (6)...
+
+ ACE2 serves as the SARS-CoV receptor, at least for tissue culture cell entry...
+
+ Lung tissue from such patients exhibits changes of diffuse alveolar damage, desquamated epithelial cells, type II cell hyperplasia, fibrin and collagen deposits in the alveolar space, increased mononuclear infiltrates in the interstitium, and, in some cases, the presence of multinucleated syncytial cells. 
+
 ```
 Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1287568/
 
-[1]:Holmes, K. V., and M. M. C. Lai. 1996. Coronaviridae: the viruses and their replication, p. 1075-1093. In B. N. Fields, D. M. Knipe, and P. M. Howley (ed.), Fields virology, 3rd ed. Lippincott-Raven Publishers, Philadelphia, Pa.<br>
+[1]:_Coronaviridae: the viruses and their replication_ <br>
+Holmes, K. V., and M. M. C. Lai. 1996. p. 1075-1093. In B. N. Fields, D. M. Knipe, and P. M. Howley (ed.), Fields virology, 3rd ed. Lippincott-Raven Publishers, Philadelphia, Pa.<br>
 
-[2]:McIntosh, K., R. K. Chao, H. E. Krause, R. Wasil, H. E. Mocega, and M. A. Mufson. 1974. Coronavirus infection in acute lower respiratory tract disease of infants. J. Infect. Dis. 130:502-507.<br>
+[2]:_Coronavirus infection in acute lower respiratory tract disease of infants._                                                                              <br>
+McIntosh, K., R. K. Chao, H. E. Krause, R. Wasil, H. E. Mocega, and M. A. Mufson. 1974.  J. Infect. Dis. 130:502-507.                                         <br>
+                                                                                                                                                              <br>
+[3]: _van der Hoek L, Pyrc K, Jebbink MF, Vermeulen-Oost W, Berkhout RJ, Wolthers KC, Wertheim-van Dillen PM, Kaandorp J, Spaargaren J, Berkhout B_           <br>
+Nat Med. 2004 Apr; 10(4):368-73.                                                                                                                              <br>
+                                                                                                                                                              <br>
+[4]: _Characterization and complete genome sequence of a novel coronavirus, coronavirus HKU1, from patients with pneumonia._ <br>                             <br>
+Woo PC, Lau SK, Chu CM, Chan KH, Tsoi HW, Huang Y, Wong BH, Poon RW, Cai JJ, Luk WK, Poon LL, Wong SS, Guan Y, Peiris JS, Yuen KY                             <br>
+J Virol. 2005 Jan; 79(2):884-95.                                                                                                                              <br>
+                                                                                                                                                              <br>
+[5]: _Angiotensin-converting enzyme 2 is a functional receptor for the SARS coronavirus._                                                                     <br>
+Li W, Moore MJ, Vasilieva N, Sui J, Wong SK, Berne MA, Somasundaran M, Sullivan JL, Luzuriaga K, Greenough TC, Choe H, Farzan M                               <br>
+Nature. 2003 Nov 27; 426(6965):450-4.                                                                                                                         <br>
+                                                                                                                                                              <br>
+[6]: _Human coronavirus NL63 employs the severe acute respiratory syndrome coronavirus receptor for cellular entry._                                          <br>
+Hofmann H, Pyrc K, van der Hoek L, Geier M, Berkhout B, Pöhlmann S                                                                                            <br>
+Proc Natl Acad Sci U S A. 2005 May 31; 102(22):7988-93.                                                                                                       <br>
 
-[3]: _van der Hoek L, Pyrc K, Jebbink MF, Vermeulen-Oost W, Berkhout RJ, Wolthers KC, Wertheim-van Dillen PM, Kaandorp J, Spaargaren J, Berkhout B_
-Nat Med. 2004 Apr; 10(4):368-73.
-
-[4]: _Characterization and complete genome sequence of a novel coronavirus, coronavirus HKU1, from patients with pneumonia._
-Woo PC, Lau SK, Chu CM, Chan KH, Tsoi HW, Huang Y, Wong BH, Poon RW, Cai JJ, Luk WK, Poon LL, Wong SS, Guan Y, Peiris JS, Yuen KY
-J Virol. 2005 Jan; 79(2):884-95.
-
-[5]: _Angiotensin-converting enzyme 2 is a functional receptor for the SARS coronavirus._
-Li W, Moore MJ, Vasilieva N, Sui J, Wong SK, Berne MA, Somasundaran M, Sullivan JL, Luzuriaga K, Greenough TC, Choe H, Farzan M
-Nature. 2003 Nov 27; 426(6965):450-4.
-
-[6]: _Human coronavirus NL63 employs the severe acute respiratory syndrome coronavirus receptor for cellular entry._
-Hofmann H, Pyrc K, van der Hoek L, Geier M, Berkhout B, Pöhlmann S
-Proc Natl Acad Sci U S A. 2005 May 31; 102(22):7988-93.
-
-
-
-
+<hr>
 
 
 ```
@@ -82,9 +87,11 @@ Proc Natl Acad Sci U S A. 2005 May 31; 102(22):7988-93.
 ```
 Source: https://www.bmj.com/content/368/bmj.m810/rr-2
 
-[4]: Hoffmann M, Kleine-Weber H, Krüger N, Müller M, Drosten C, Pöhlmann S. The novel coronavirus 2019 (2019-nCoV) uses the SARS-coronavirus receptor ACE2 and the cellular protease TMPRSS2 for entry into target cells. bioRxiv 2020:2020.01.31.929042. <br>
+[4]:_The novel coronavirus 2019 (2019-nCoV) uses the SARS-coronavirus receptor ACE2 and the cellular protease TMPRSS2 for entry into target cells._
+Hoffmann M, Kleine-Weber H, Krüger N, Müller M, Drosten C, Pöhlmann S. bioRxiv 2020:2020.01.31.929042. <br>
 
-[5]: Ferrario CM, Jessup J, Chappell MC, et al. Effect of angiotensin-converting enzyme inhibition and angiotensin II receptor blockers on cardiac angiotensin-converting enzyme 2. Circulation 2005;111:2605-10. <br>
+[5]:_Effect of angiotensin-converting enzyme inhibition and angiotensin II receptor blockers on cardiac angiotensin-converting enzyme 2_
+Ferrario CM, Jessup J, Chappell MC, et al.. Circulation 2005;111:2605-10. <br>
 
 
 
@@ -105,4 +112,5 @@ Source: https://www.bmj.com/content/368/bmj.m810/rr-2
 https://www.bmj.com/content/368/bmj.m810
 <hr>
  Stop touching your eyes, mouth nose, Wash ones hands completely for at least 20 seconds. The Virus enters through the Eyes and the Mouth. 
+ Epidemiologic data indicate that SARS-CoV is spread by respiratory droplets and contact. While such findings suggest that the virus enters the host through the mucosa of the respiratory tract and the eyes,
 <hr>
