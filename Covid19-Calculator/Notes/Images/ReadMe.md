@@ -1,4 +1,4 @@
 ![Family Tree](FamilyTree.jpg)
-![Genome Organization](Genome Organization.jpg)
+![Genome Organization](GenomeOrganization.jpg)
 ![Hunan Bus Outbreak](HunanBusOutbreak.jpg)
-![Protein Spikes](Spike Protein.jpg)
+![Protein Spikes](SpikeProtein.jpg)
