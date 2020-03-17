@@ -3,6 +3,24 @@
 
 
 
+
+<hr>
+
+## Data Mining Resources
+
+<hr>
+
+### COVID-19 Open Research Dataset Challenge (CORD-19)
+<hr>
+The CORD-19 dataset represents the most extensive machine-readable coronavirus literature collection available for data mining to date. This allows the worldwide AI research community the opportunity to apply text and data mining approaches to find answers to questions within, and connect insights across, this content in support of the ongoing COVID-19 response efforts worldwide.
+<hr>
+Source: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge?fbclid=IwAR0G_MAEy-cxHXPfqrVzwedc5rT3TZlj8WTLSSLjlZZwtSbZeorxAGIVats
+
+
+
+
+
+
 <hr>
 
 ## Cytokine Storm Related articles and Links
@@ -49,7 +67,7 @@ Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-
 
 ```
 Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1287568/
-
+<hr>
 [1]:_Coronaviridae: the viruses and their replication_ <br>
 Holmes, K. V., and M. M. C. Lai. 1996. p. 1075-1093. In B. N. Fields, D. M. Knipe, and P. M. Howley (ed.), Fields virology, 3rd ed. Lippincott-Raven Publishers, Philadelphia, Pa.<br>
 
@@ -86,7 +104,7 @@ Proc Natl Acad Sci U S A. 2005 May 31; 102(22):7988-93.                         
 
 ```
 Source: https://www.bmj.com/content/368/bmj.m810/rr-2
-
+<hr>
 [4]:_The novel coronavirus 2019 (2019-nCoV) uses the SARS-coronavirus receptor ACE2 and the cellular protease TMPRSS2 for entry into target cells._
 Hoffmann M, Kleine-Weber H, Krüger N, Müller M, Drosten C, Pöhlmann S. bioRxiv 2020:2020.01.31.929042. <br>
 

@@ -346,6 +346,35 @@ void Pandemic_Map::load_All_TimeSeries()
 
 
 
+
+
+
+
+
+Daily_Update::Daily_Update(std::string _file)
+{
+    File = CSV_Parser(_file);
+    Area.Region = ;
+    Area.Province = ;
+    Area.Latitude = ;
+    Area.Longitude = ;
+
+std::vector<std::pair<Date_t, uint32_t>> Cases;
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
 std::ostream& operator <<(std::ostream& _str, Location_t _place)
 {
     _str << "Location:  " << _place.Province << " - " << _place.Region <<"\n";

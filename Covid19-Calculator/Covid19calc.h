@@ -319,9 +319,12 @@ public:
 };
 
 
-
+#include"FileHandling.h"
 struct Daily_Update
 {
+    Daily_Update(std::string _file);
+    
+     CSV_Parser File;
      Location_t Area;
      std::vector<std::pair<Date_t, uint32_t>> Cases;
 };

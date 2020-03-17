@@ -23,8 +23,6 @@ struct File_t
         Filename = Fp.filename().string();
         Filepath = Fp.parent_path().string();
         Extension = Fp.extension().string();
-
-        //read_Line();
     }
 
     void OpenFile(std::string _file)
@@ -36,22 +34,41 @@ struct File_t
             ERROR_LOG("Error Loading File or File is Empty: \n" << _file, file_NotFound);
         }
     }
-
-    std::string read_Line()
+    void CloseFile()
     {
-        std::string line;
-        getline(FileStream, line);
-        return line;
+        FileStream.close();
     }
 
+
+    std::istream& read_Line(std::string& _line)
+    {
+        return getline(FileStream, _line);
+    }
+
+
+    /* Returns the Name of the File */
+    std::string get_Name() { return    Filename; }
+    /* Returns the Path of the File */
+    std::string get_Path() { return    Filepath; }
+    /* Returns the Full Name and Path of File */
+    std::string get_FullName() { return    Fullname; }
+    /* Returns the Type Associated with the File*/
+    std::string get_Extension() { return    Extension; }
+
+    /* Returns the Working Stream of the Given File*/
+    std::ifstream& get_Stream() { return FileStream; }
+
+
+    size_t size() const { return Filesize; }
+private:
     size_t Filesize{ 0 };
+
     std::string Filename;
     std::string Filepath;
     std::string Fullname;
     std::string Extension;
     std::ifstream FileStream;
 
-private:
     size_t get_filesize(const char* filename)
     {
         std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
@@ -63,7 +80,7 @@ private:
     }
 };    
 
-
+//std::string Head;// = CSVFile.read_Line();
 
 class CSV_Parser
 {
@@ -73,16 +90,16 @@ public:
     CSV_Parser(std::string _file)
     {
         CSVFile = File_t(_file);
-        std::string line;
+        std::string Line;
 
         /* Gets the Header Information */
-        std::string Head = CSVFile.read_Line();
-        Header = parse_Line(Head);
+        CSVFile.read_Line(Line);
+        Header = parse_Line(Line);
 
         /* Extracts all the Lines from the File */
-        for ( ;getline(CSVFile.FileStream, line); )
+        while (CSVFile.read_Line(Line)) 
         {
-            Lines.emplace_back(line);
+            Lines.emplace_back(Line);
         }
 
         /* Parses the Lines and places them into appropriate Column of the Vector */
@@ -115,7 +132,6 @@ public:
         return result;
     }
 
-
     std::string split_str(std::string &_input, char _delim = ',')
     {
         std::string result;
@@ -145,7 +161,6 @@ public:
         }
         return result;
     }
-
 
     std::vector<std::string> parse_Line(std::string _line)
     {
