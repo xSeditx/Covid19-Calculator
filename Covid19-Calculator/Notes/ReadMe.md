@@ -49,8 +49,8 @@ Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-
 ```
 Source: https://www.bmj.com/content/368/bmj.m810/rr-2
 
--[4]-: Hoffmann M, Kleine-Weber H, Krüger N, Müller M, Drosten C, Pöhlmann S. The novel coronavirus 2019 (2019-nCoV) uses the SARS-coronavirus receptor ACE2 and the cellular protease TMPRSS2 for entry into target cells. bioRxiv 2020:2020.01.31.929042.
--[5]-: Ferrario CM, Jessup J, Chappell MC, et al. Effect of angiotensin-converting enzyme inhibition and angiotensin II receptor blockers on cardiac angiotensin-converting enzyme 2. Circulation 2005;111:2605-10.
+-[4]-: Hoffmann M, Kleine-Weber H, Krüger N, Müller M, Drosten C, Pöhlmann S. The novel coronavirus 2019 (2019-nCoV) uses the SARS-coronavirus receptor ACE2 and the cellular protease TMPRSS2 for entry into target cells. bioRxiv 2020:2020.01.31.929042. <br>
+-[5]-: Ferrario CM, Jessup J, Chappell MC, et al. Effect of angiotensin-converting enzyme inhibition and angiotensin II receptor blockers on cardiac angiotensin-converting enzyme 2. Circulation 2005;111:2605-10. <br>
 
 
 
