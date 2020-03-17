@@ -3,7 +3,7 @@
 #include"Common.h"
 #include"csv.h"
 
-#define Print(x)  std::cout << x << "\n"
+#include"FileHandling.h"
 
 
 
@@ -31,6 +31,7 @@ struct Location_t
     float Longitude;
 };
 std::ostream& operator <<(std::ostream& _str, Location_t _place);
+
 
 /* Year / Day / Month : Time Data */
 struct Date_t
@@ -150,10 +151,11 @@ struct Date_t
         return result;
     }
 };                    
-
 std::ostream& operator <<(std::ostream& _str, Date_t _time);
 
 
+/* User configuration Location name and GeoLocation
+   TODO: Set Update Frequency */
 struct Configuration
 {
     Configuration(std::string _file)
@@ -216,7 +218,7 @@ struct Outbreak_info
 };
 std::ostream& operator <<(std::ostream& _str, Outbreak_info _time);
 
-
+/* Mapping a Snapshot at a Specific Time of the Outbreak */
 class Epidemic_Map
 {
 public:
@@ -258,10 +260,18 @@ public:
         }
 };
 
+/* Mapping Specific locations Daily as new cases Emerge */
+struct Daily_Update
+{
+     Daily_Update(std::string _file);
+    
+     CSV_Parser File;
+     std::unordered_map<std::string, uint32_t> Location_Total;
+     std::vector< Location_t> Places;
+     std::vector<std::pair<Date_t, uint32_t>> Cases;
+};
 
-#include <filesystem>
-namespace fs = std::filesystem;
-
+/* Total Pandemic as a whole and all the data I have managed to parse so far */
 class Pandemic_Map
 { 
 public:
@@ -277,7 +287,7 @@ public:
     void load_All_Archived();
 
     /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\csse_covid_19_data\csse_covid_19_time_series */
-    std::vector<Epidemic_Map> Time_Series;
+    std::vector<Daily_Update> Time_Series;
     std::vector<std::string>  TimeSeries_files;
     void load_All_TimeSeries();
     /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\who_covid_19_situation_reports\who_covid_19_sit_rep_time_series */
@@ -294,8 +304,8 @@ public:
             }
         }
 
-
-        path = "COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/";
+               
+        path = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/";            //COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/";
         for (const auto & entry : fs::directory_iterator(path))
         {
             auto P = fs::path(entry.path()).extension();
@@ -319,15 +329,6 @@ public:
 };
 
 
-#include"FileHandling.h"
-struct Daily_Update
-{
-    Daily_Update(std::string _file);
-    
-     CSV_Parser File;
-     Location_t Area;
-     std::vector<std::pair<Date_t, uint32_t>> Cases;
-};
 
 
 /* ======================================================================================================================
@@ -340,5 +341,7 @@ struct Daily_Update
 -- 2019 Novel Coronavirus COVID - 19 (2019 - nCoV) Data Repository by Johns Hopkins CSSE
 /* https://github.com/CSSEGISandData/COVID-19
 /* 
+--Coronavirus(COVID - 19) Resources For Pharmacists
+/*https://www.idstewardship.com/coronavirus-covid-19-resources-pharmacists/
 /* 
 /* ======================================================================================================================*/

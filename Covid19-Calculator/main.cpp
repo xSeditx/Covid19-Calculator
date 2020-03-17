@@ -1,18 +1,19 @@
-#include"Covid19calc.h"
- 
-std::mutex DEBUGMutex;
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-Configuration Config("Config.txt");
-
-
 #include <iostream> 
 #include <string> 
 #include <string>
 #include <iostream>
 #include <filesystem>
+
+#include"Covid19calc.h"
  
 namespace fs = std::filesystem;
+
+
+//TODO: Find a place to put this shit 
+std::mutex DEBUGMutex;
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+Configuration Config("Config.txt");
+
 
 _static Error_t ErrorHandler::CurrentError;
 std::string ErrorString[] =
@@ -21,50 +22,31 @@ std::string ErrorString[] =
     "File Not Found",
     "To many Colmns in CSV file"
 };
-
-
 #include"FileHandling.h"
 
-
+/* =========================================================================================================================================
+       Program for Loading John Hopkins Git Repository of Covid-19 data from the start of the outbreak to current day
+       Information is matched to a Region/Province and is being made searchable 
+       Various calculations are also going to be performed in an attempt to make better predictions and Alert the user when Outbreaks are 
+       Near them as well as give an estimate of how long before one gets to them.
+   =========================================================================================================================================*/
 int main()
 {
-    std::vector<std::string> Filenames;
-    std::string path = "COVID-19/archived_data/archived_daily_case_updates/";
-    for (const auto & entry : fs::directory_iterator(path))
-    {
-        auto P = fs::path(entry.path()).extension();
-        if (entry.path().extension() == ".csv")
-        {
-            Filenames.push_back(entry.path().string());
-        }
-        
-    }
-
-    CSV_Parser Fi = CSV_Parser("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
-   // Parser Parse("COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv");
-
-
     Pandemic_Map Total_Pandemic;
     Total_Pandemic.Retrieve_All_Filenames();
     Total_Pandemic.load_All_Archived();
     Total_Pandemic.load_All_DailyReports();
 
+    //TODO: Stopped here on 3/17/2020 Need some sort of proper encapslation for the Recover/Death/Confirmed Ratios to make that data clean and searchable then I can contain that inside pandemic map
+    Total_Pandemic.load_All_TimeSeries();
 
-    Epidemic_Map Map;
 
-    std::vector<Epidemic_Map> AllMap;
-    for (auto& F : Filenames)
-    {
-        AllMap.push_back(Epidemic_Map());
-        AllMap.back().load_Archived_OutbreakData(F);
-    }
-    Map.load_Archived_OutbreakData(Filenames[0]);        //who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/who_covid_19_sit_rep_time_series.csv"); //Cases.csv"); //who_covid_19_sit_rep_time_series.csv
-    Map.display_Data();
-    {}
-    for (auto &A : AllMap)
+    for (auto &A : Total_Pandemic.Archived_Data)
     {
         A.display_Data();
     }
+
+    /* Simple Test run for Searching the Data using the Old Stable Archived Data */
     bool Running{ true };
     while (Running)
     {
@@ -74,9 +56,9 @@ int main()
         if (str == "end") Running = false;
         std::cout << "Outbreak Information for " << str << "\n";
 
-        if (AllMap.back().is_Local_Outbreaks(str))
+        if (Total_Pandemic.Archived_Data.back().is_Local_Outbreaks(str))
         {
-            for (auto& P : AllMap.back().search_Place(str))
+            for (auto& P : Total_Pandemic.Archived_Data.back().search_Place(str))
             {
                 Print(P);
             }
@@ -109,10 +91,37 @@ int main()
 
 
 
+
+
+
 /* =============================================================================================================
                                   TRASH
    =============================================================================================================
-   // /COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/who_covid_19_sit_rep_time_series.csv
+ 
+ 
+ //for (auto& F : Filenames)
+//{
+//    AllMap.push_back(Epidemic_Map());
+//    AllMap.back().load_Archived_OutbreakData(F);
+//}
+//    Map.load_Archived_OutbreakData(Filenames[0]);        //who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/who_covid_19_sit_rep_time_series.csv"); //Cases.csv"); //who_covid_19_sit_rep_time_series.csv
+//    Map.display_Data();
+//std::vector<std::string> Filenames;
+//std::string path = "COVID-19/archived_data/archived_daily_case_updates/";
+//for (const auto & entry : fs::directory_iterator(path))
+//{
+//    auto P = fs::path(entry.path()).extension();
+//    if (entry.path().extension() == ".csv")
+//    {
+//        Filenames.push_back(entry.path().string());
+//    }
+//}
+
+ 
+ 
+ 
+ 
+ // /COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/who_covid_19_sit_rep_time_series.csv
 //REPO
 //https://github.com/CSSEGISandData/COVID-19.git
 

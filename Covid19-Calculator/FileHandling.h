@@ -25,6 +25,7 @@ struct File_t
         Extension = Fp.extension().string();
     }
 
+    /* Opens the Associated File */
     void OpenFile(std::string _file)
     {
         FileStream.open(_file.c_str());
@@ -34,17 +35,17 @@ struct File_t
             ERROR_LOG("Error Loading File or File is Empty: \n" << _file, file_NotFound);
         }
     }
+    /* Closes the Associated File */
     void CloseFile()
     {
         FileStream.close();
     }
 
-
+    /* Reads a Single Line from the File Stream */
     std::istream& read_Line(std::string& _line)
     {
         return getline(FileStream, _line);
     }
-
 
     /* Returns the Name of the File */
     std::string get_Name() { return    Filename; }
@@ -58,7 +59,7 @@ struct File_t
     /* Returns the Working Stream of the Given File*/
     std::ifstream& get_Stream() { return FileStream; }
 
-
+    /* Returns the Size of the File in Bytes */
     size_t size() const { return Filesize; }
 private:
     size_t Filesize{ 0 };

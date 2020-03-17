@@ -27,7 +27,6 @@ void Epidemic_Map::display_Data()
 }
 void Epidemic_Map::load_Archived_OutbreakData(std::string _filename)
 {
-
     io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_filename);// "Cases.csv");
     in.read_header
     (
@@ -167,13 +166,6 @@ void Epidemic_Map::load_Daily_OutbreakData(std::string _filename)
     }
 
 }
-void Epidemic_Map::load_TimeSeries_OutbreakData(std::string _filename)
-{
-    
-}
-
-
-
 
 
 bool Epidemic_Map::is_Local_Outbreaks(std::string _location)
@@ -308,11 +300,6 @@ std::vector<Outbreak_info>
     return result;
 }
 
-
-
-
-
-
 void Pandemic_Map::load_All_Archived()
 {
     for (auto& File : ArchivedData_files)
@@ -322,8 +309,6 @@ void Pandemic_Map::load_All_Archived()
         Archived_Data.emplace_back(Epidemic);
     }
 }
-
-
 void Pandemic_Map::load_All_DailyReports()
 {
     for (auto& File : DailyReport_files)
@@ -337,33 +322,43 @@ void Pandemic_Map::load_All_TimeSeries()
 {
     for (auto& File : TimeSeries_files)
     {
-        Epidemic_Map Epidemic;
-        Epidemic.load_TimeSeries_OutbreakData(File);
-        Time_Series.emplace_back(Epidemic);
+        Time_Series.emplace_back(Daily_Update(File));
     }
 }
 
 
-
-
-
-
-
-
-
 Daily_Update::Daily_Update(std::string _file)
+    :
+    File (CSV_Parser(_file))
 {
-    File = CSV_Parser(_file);
-    Area.Region = ;
-    Area.Province = ;
-    Area.Latitude = ;
-    Area.Longitude = ;
 
-std::vector<std::pair<Date_t, uint32_t>> Cases;
-}
+    for(auto& UP: File.Parsed_data)
+    {
+        Location_t Area;
+        Area.Region = UP[0];
+        Area.Province = UP[1];
+        try{
+            Area.Latitude = std::stof(UP[2]);
+            Area.Longitude = std::stof(UP[3]);
+        }catch (...){
+            Area.Latitude = 0;
+            Area.Longitude = 0;
+        }
+        try {
+            Location_Total[Area.Province] += std::stoi(UP.back());
+        }
+        catch (...)
+        {
+            Location_Total[Area.Province] += 0;
+        }
+        Places.emplace_back(Area);
+    }
+
+   
+
+ }
 
 
-};
 
 
 
@@ -397,6 +392,7 @@ std::ostream& operator <<(std::ostream& _str, Outbreak_info _time)
    _str << "Date_Time : " << _time.Date_Time  << "\n";
     return _str;
 }
+
 
 
 

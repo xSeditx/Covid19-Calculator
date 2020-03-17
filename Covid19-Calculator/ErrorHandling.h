@@ -1,6 +1,7 @@
 #pragma once
 #include"Common.h"
 
+/* Enumerated Error Types */
 enum Error_t
 {
     No_Error,
@@ -8,13 +9,15 @@ enum Error_t
     Extra_column_found
 };
 extern std::string ErrorString[];
+
+/* Basic Error handler. 
+   NOTE: Likely to remove in the near future  */
 struct ErrorHandler
 {
 
     void set_ErrorCode(Error_t _er)
     {
         CurrentError = _er;
-        //ErrorCode = (int)_er;
     }
     std::string get_Error(Error_t _code)
     {

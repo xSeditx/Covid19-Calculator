@@ -43,12 +43,7 @@ extern std::mutex DEBUGMutex;
 #    define DEBUGPrint(col,x)
 #endif 
 
-//  std::thread::id CurrentThread = std::this_thread::get_id();\
-
-
 
 #define ERROR_LOG(x, err)   ColorPrint(CON_Red, x); ErrorHandler::CurrentError = err;
-
-
 
 #define _static 
