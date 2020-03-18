@@ -144,6 +144,7 @@
     <ClInclude Include="csv.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="FileHandling.h" />
+    <ClInclude Include="JsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Covid19calc.cpp" />

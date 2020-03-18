@@ -24,6 +24,7 @@ std::string ErrorString[] =
 };
 #include"FileHandling.h"
 
+#include"JsonParser.h"
 /* =========================================================================================================================================
        Program for Loading John Hopkins Git Repository of Covid-19 data from the start of the outbreak to current day
        Information is matched to a Region/Province and is being made searchable 
@@ -32,6 +33,14 @@ std::string ErrorString[] =
    =========================================================================================================================================*/
 int main()
 {
+
+
+    Json JSON_FileTest("Test.json");
+
+
+
+
+
     Pandemic_Map Total_Pandemic;
     Total_Pandemic.Retrieve_All_Filenames();
     Total_Pandemic.load_All_Archived();
