@@ -46,5 +46,8 @@
     <None Include="Notes\ReadMe.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Notes\Images\ReadMe.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

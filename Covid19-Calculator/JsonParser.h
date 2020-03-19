@@ -104,6 +104,10 @@ struct Json
             FullText += Line;
             Lines.push_back(Line);
         }
+
+        std::vector<std::string> Result = get_Object(FullText);
+
+        std::string G = Whole_Object(Lines);
         std::string Buffer;
         std::vector<std::string> Objects;
         Objects.push_back(" ");
@@ -128,67 +132,88 @@ struct Json
                 }
                 else
                 {
-                    Objects.push_back(" ");
+                    Objects[RecursionCount] += L.substr(0, FirstIn);
+                    Objects.push_back("");
                     ++RecursionCount;
+                    Objects[RecursionCount] += L.substr(FirstIn);
                 }
 
-
-                //if (FirstOut == std::string::npos && RecursionCount == 0)
-                //{// There are no } in the Line
-                //    Buffer += L.substr(0, FirstOut);
-                //    continue;
-                //}
-                //
-                //if (FirstIn != std::string::npos)
-                //{// There are no { in the Line
-                //    ++RecursionCount;
-                //    continue;
-                //}
-            }   //
-
+            }   
             if (RecursionCount == -1) break;
         }
+
         //get_Object(FullText);
         for(auto& A: Objects)
         {
             Print("OBJECT: " << A);
         }
     }
-    std::string get_Object(std::string _input)
+    std::string Whole_Object(std::vector<std::string> _input)
     {
-         std::string result;
-         std::vector<std::string>  Buffer;
+        int Rec{ 0 };
+        size_t LineNum{ 0 };
+        std::string result;
+        for (auto&L : _input)
+        {
+            size_t FirstIn = L.find('{');
+            size_t FirstOut = L.find('}');
 
-        size_t FirstIn = _input.find('{');
-        size_t FirstOut = _input.find('}');
-        _input = _input.substr(FirstIn + 1);
-        if (FirstIn == std::string::npos || FirstOut == std::string::npos)
-        {
-            __debugbreak();
-        }
-        if (FirstIn < FirstOut)
-        {
-            ++RecursionCount;
-            std::string H = get_Object(_input) + " ";
-            Buffer.push_back(H);
-        }
-        else
-        {
-            --RecursionCount;
-            if (Buffer.size())
+            if (FirstIn != std::string::npos)
             {
-               
-                for (auto& S : Buffer)
+                Rec++;
+            }
+            if (FirstOut != std::string::npos)
+            {
+                Rec--;
+                if (Rec == -1)
                 {
-                    result += S;
+                    break;
                 }
-                return result;
             }
-            else
-            {
-                return result;
-            }
+            result += L;
+            ++LineNum;
         }
+        return result;
+    }
+
+
+
+    std::vector<std::string> get_Object(std::string _input)
+    {
+        std::vector<std::string> result;
+        size_t Start = _input.find_first_of('{');
+        size_t End = _input.find_last_of('}');
+
+        size_t Escape = _input.find_first_of('}');
+        if (Escape < Start)
+        {// Escape is before we enter another Object
+
+        }
+
+        std::vector<std::string>
+            Ret = get_Object(_input.substr(Start + 1, End-1));
+
+        result.insert(result.end(), Ret.begin(), Ret.end());
+        return result;
+
+//std::string PushText = "";
+//std::vector<std::string>  Buffer;
+//PushText.
+//size_t FirstIn = _input.find('{');
+//size_t FirstOut = _input.find('}');
+/// _input = _input.substr(FirstIn + 1);
+//
+//if (FirstIn < FirstOut)
+//{
+//    result.push_back(_input.substr(FirstIn + 1, FirstOut));
+//    std::vector<std::string> Ret = get_Object(_input.substr(FirstIn + 1));
+//    result.insert(result.end(), Ret.begin(), Ret.end());
+//}
+//else
+//{
+//    result.back() += _input.substr(FirstOut);
+//    return result;
+//}
     }
 
     std::string split_str(std::string &_input, char _delim = '{')
@@ -222,11 +247,41 @@ struct Json
 
 
 
+//if (Buffer.size())
+//{
+//   
+//    for (auto& S : Buffer)
+//    {
+//        result += S;
+//    }
+//    return result;
+//}
+//else
+//{
+//    return result;
+//}
+
+
+
+// if (FirstIn == std::string::npos || FirstOut == std::string::npos)
+// {
+//     __debugbreak();
+// }
 
 
 
 
-
+//if (FirstOut == std::string::npos && RecursionCount == 0)
+//{// There are no } in the Line
+//    Buffer += L.substr(0, FirstOut);
+//    continue;
+//}
+//
+//if (FirstIn != std::string::npos)
+//{// There are no { in the Line
+//    ++RecursionCount;
+//    continue;
+//}
 
 //std::vector<std::string> Test;
 //Test.push_back(FullText);
