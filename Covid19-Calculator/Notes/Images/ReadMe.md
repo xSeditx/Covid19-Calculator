@@ -1,5 +1,5 @@
 
-![Fusion Inhibitor](fusionInhibitor.png)
+![Fusion Inhibitor](fusionInhibitor.jpg)
 ![Rendering of Corona Structure](Rendering.jpg)
 ![Ranking](Ranking.png)
 ![Spread](ContagiousFactor.jpeg)
