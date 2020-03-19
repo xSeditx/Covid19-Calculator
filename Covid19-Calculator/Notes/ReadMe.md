@@ -28,8 +28,10 @@ Source: https://www.bioworld.com/COVID19products
 ## Structure and DNA of Covid
 <hr>
 
-### _Coronavirus genome structure and replication_
+### Coronavirus genome structure and replication
+
 Source: https://www.ncbi.nlm.nih.gov/pubmed/15609507
+
 <br>
 
 
@@ -77,7 +79,9 @@ Source: https://www.evolutamente.it/covid-19-pneumonia-inflammasomes-the-melaton
 ## ACE-2 Receptor Related articles and Links
 
 <hr>
+
 ### Are patients with hypertension and diabetes mellitus at increased risk for COVID-19 infection? 
+
 <br>
 Source: https://www.thelancet.com/pdfs/journals/lanres/PIIS2213-2600(20)30116-8.pdf
 
@@ -99,10 +103,6 @@ Source: https://www.ahajournals.org/doi/10.1161/01.HYP.0000146120.29648.36 <br>
 ``` 
 Abstract
 Continuously emerging highly pathogenic human coronaviruses (HCoVs) remain a major threat to human health, as illustrated in past SARS-CoV and MERS-CoV outbreaks. The development of a drug with broad-spectrum HCoV inhibitory activity would address this urgent unmet medical need. Although previous studies have suggested that the HR1 of HCoV spike (S) protein is an important target site for inhibition against specific HCoVs, whether this conserved region could serve as a target for the development of broad-spectrum pan-CoV inhibitor remains controversial. Here, we found that peptide OC43-HR2P, derived from the HR2 domain of HCoV-OC43, exhibited broad fusion inhibitory activity against multiple HCoVs. EK1, the optimized form of OC43-HR2P, showed substantially improved pan-CoV fusion inhibitory activity and pharmaceutical properties. Crystal structures indicated that EK1 can form a stable six-helix bundle structure with both short α-HCoV and long β-HCoV HR1s, further supporting the role of HR1 region as a viable pan-CoV target site.
-
-
-![Fusion Inhibitor](Images/fusionInhibitor.jpg)
-
 
 ```
 
