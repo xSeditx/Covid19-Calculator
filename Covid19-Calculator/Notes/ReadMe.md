@@ -13,9 +13,14 @@
 ### COVID-19 Open Research Dataset Challenge (CORD-19)
 <hr>
 The CORD-19 dataset represents the most extensive machine-readable coronavirus literature collection available for data mining to date. This allows the worldwide AI research community the opportunity to apply text and data mining approaches to find answers to questions within, and connect insights across, this content in support of the ongoing COVID-19 response efforts worldwide.
-<hr>
+<br>
 Source: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge?fbclid=IwAR0G_MAEy-cxHXPfqrVzwedc5rT3TZlj8WTLSSLjlZZwtSbZeorxAGIVats
 
+<hr>
+
+
+### Biopharma products in development for COVID-19
+Source: https://www.bioworld.com/COVID19products
 
 
 
@@ -23,8 +28,9 @@ Source: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
 ## Structure and DNA of Covid
 <hr>
 
- _Coronavirus genome structure and replication_
+### _Coronavirus genome structure and replication_
 Source: https://www.ncbi.nlm.nih.gov/pubmed/15609507
+<br>
 
 
 
@@ -54,9 +60,10 @@ Source: https://www.ncbi.nlm.nih.gov/pubmed/15609507
 Source: https://www.newswise.com/articles/here-s-a-playbook-for-stopping-deadly-cytokine-storm-syndrome
 
 
+<hr>
 
 
- _COVID19, PNEUMONIA & INFLAMMASOMES THE MELATONIN CONNECTION_
+### COVID19, PNEUMONIA & INFLAMMASOMES THE MELATONIN CONNECTION_
  ```
  Melatonine has been shown to quite Cytokin Storms
  ```
@@ -70,6 +77,21 @@ Source: https://www.evolutamente.it/covid-19-pneumonia-inflammasomes-the-melaton
 ## ACE-2 Receptor Related articles and Links
 
 <hr>
+### Are patients with hypertension and diabetes mellitus at increased risk for COVID-19 infection? 
+<br>
+Source: https://www.thelancet.com/pdfs/journals/lanres/PIIS2213-2600(20)30116-8.pdf
+
+
+### Structure-Based Discovery of a Novel Angiotensin-Converting Enzyme 2 Inhibitor
+```
+Abstract
+Angiotensin-converting enzyme 2 (ACE2) is considered an important therapeutic target for controlling cardiovascular diseases and severe acute respiratory syndrome (SARS) outbreaks. Recently solved high-resolution crystal structures of the apo-bound and inhibitor-bound forms of ACE2 have provided the basis for a novel molecular docking approach in an attempt to identify ACE2 inhibitors and compounds that block SARS coronavirus spike protein-mediated cell fusion. In this study, ≈140 000 small molecules were screened by in silico molecular docking. In this structure-activity relation study, the molecules with the highest predicted binding scores were identified and assayed for ACE2 enzymatic inhibitory activity and for their ability to inhibit SARS coronavirus spike protein-mediated cell fusion. This approach identified N-(2-aminoethyl)-1 aziridine-ethanamine as a novel ACE2 inhibitor that also is effective in blocking the SARS coronavirus spike protein-mediated cell fusion. Thus, the molecular docking approach resulting in the inhibitory capacity of N-(2-aminoethyl)-1 aziridine-ethanamine provides an attractive small molecule lead compound on which the development of more effective therapeutic agents could be developed to modulate hypertension and for controlling SARS infections.
+
+```
+Source: https://www.ahajournals.org/doi/10.1161/01.HYP.0000146120.29648.36 <br>
+
+<hr>
+
 
 ### A pan-coronavirus fusion inhibitor targeting the HR1 domain of human coronavirus spike  
 <br>
@@ -88,6 +110,7 @@ Source: https://advances.sciencemag.org/content/5/4/eaav4580.full
 
 [SEE: Fusion Inhibitor Image ]
 
+<hr>
 
 
 
