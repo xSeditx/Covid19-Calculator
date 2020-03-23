@@ -189,31 +189,14 @@ struct Json
         {// Escape is before we enter another Object
 
         }
-
-        std::vector<std::string>
-            Ret = get_Object(_input.substr(Start + 1, End-1));
+        std::vector<std::string> Ret;
+        if (_input.find('}') != std::string::npos)
+        {
+                Ret = get_Object(_input.substr(Start + 1, End - 1));
+        }
 
         result.insert(result.end(), Ret.begin(), Ret.end());
         return result;
-
-//std::string PushText = "";
-//std::vector<std::string>  Buffer;
-//PushText.
-//size_t FirstIn = _input.find('{');
-//size_t FirstOut = _input.find('}');
-/// _input = _input.substr(FirstIn + 1);
-//
-//if (FirstIn < FirstOut)
-//{
-//    result.push_back(_input.substr(FirstIn + 1, FirstOut));
-//    std::vector<std::string> Ret = get_Object(_input.substr(FirstIn + 1));
-//    result.insert(result.end(), Ret.begin(), Ret.end());
-//}
-//else
-//{
-//    result.back() += _input.substr(FirstOut);
-//    return result;
-//}
     }
 
     std::string split_str(std::string &_input, char _delim = '{')
@@ -333,3 +316,26 @@ struct Json
 //    
 //   // _input = _input.substr(Start);
 // }
+
+
+
+
+
+//std::string PushText = "";
+//std::vector<std::string>  Buffer;
+//PushText.
+//size_t FirstIn = _input.find('{');
+//size_t FirstOut = _input.find('}');
+/// _input = _input.substr(FirstIn + 1);
+//
+//if (FirstIn < FirstOut)
+//{
+//    result.push_back(_input.substr(FirstIn + 1, FirstOut));
+//    std::vector<std::string> Ret = get_Object(_input.substr(FirstIn + 1));
+//    result.insert(result.end(), Ret.begin(), Ret.end());
+//}
+//else
+//{
+//    result.back() += _input.substr(FirstOut);
+//    return result;
+//}

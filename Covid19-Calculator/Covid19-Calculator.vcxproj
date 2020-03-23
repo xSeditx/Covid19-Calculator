@@ -71,15 +71,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(Solution)../Bin;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\eigen;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\glfw\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include\nanogui;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solution)../Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(Solution)../Bin;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\eigen;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\glfw\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include\nanogui;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solution)../Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(Solution)../Bin;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\eigen;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\glfw\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include\nanogui;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solution)../Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(Solution)../Bin;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\eigen;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\ext\glfw\include;C:\Users\curti\source\repos\Covid19-Calculator\Bin\nanogui\include\nanogui;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solution)../Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -97,7 +105,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions) ; _CRT_SECURE_NO_WARNINGS </PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -128,7 +136,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING; _CRT_SECURE_NO_WARNINGS ;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -144,10 +152,33 @@
     <ClInclude Include="csv.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="FileHandling.h" />
+    <ClInclude Include="Graphics\Application.h" />
+    <ClInclude Include="Graphics\Camera.h" />
+    <ClInclude Include="Graphics\Collider.h" />
+    <ClInclude Include="Graphics\Fonts.h" />
+    <ClInclude Include="Graphics\GameObject.h" />
+    <ClInclude Include="Graphics\GUI.h" />
+    <ClInclude Include="Graphics\Image.h" />
+    <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Graphics\Scene.h" />
+    <ClInclude Include="Graphics\Sprite.h" />
+    <ClInclude Include="Graphics\Time.h" />
+    <ClInclude Include="Graphics\Window.h" />
     <ClInclude Include="JsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Covid19calc.cpp" />
+    <ClCompile Include="Graphics\Application.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
+    <ClCompile Include="Graphics\Collider.cpp" />
+    <ClCompile Include="Graphics\GameObject.cpp" />
+    <ClCompile Include="Graphics\GUI.cpp" />
+    <ClCompile Include="Graphics\Image.cpp" />
+    <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\Scene.cpp" />
+    <ClCompile Include="Graphics\Sprite.cpp" />
+    <ClCompile Include="Graphics\Time.cpp" />
+    <ClCompile Include="Graphics\Window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,13 @@
 
 <hr>
 
+### Good graphical representation of the same Data we are working with here.
+
+```
+```
+
+Source: https://coronavirus.jhu.edu/map.html?fbclid=IwAR3GbXZUmKAhVrN1P_O7NLAL3G99uyMrumw0yfOdZo9ZYOfOo6-PabYz2-c
+
 ### COVID-19 Open Research Dataset Challenge (CORD-19)
 <hr>
 The CORD-19 dataset represents the most extensive machine-readable coronavirus literature collection available for data mining to date. This allows the worldwide AI research community the opportunity to apply text and data mining approaches to find answers to questions within, and connect insights across, this content in support of the ongoing COVID-19 response efforts worldwide.
@@ -79,6 +86,27 @@ Source: https://www.evolutamente.it/covid-19-pneumonia-inflammasomes-the-melaton
 ## ACE-2 Receptor Related articles and Links
 
 <hr>
+
+
+### Attenuation of myocardial fibrosis with curcumin is mediated by modulating expression of angiotensin II AT1/AT2 receptors and ACE2 in rats
+
+```
+This study tested the hypothesis that inhibition of myocardial fibrosis by curcumin is associated with modulating expression of angiotensin II (Ang II) receptors and angiotensin-converting enzyme 2 (ACE2)...
+
+. An increase in ACE2 activity is associated with a decrease in tissue level of Ang II through degradation of Ang II to Ang...
+
+suggesting that down-regulation of ACE2 expression is mediated via AT1 receptor activation...
+
+
+
+
+```
+
+Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4651552/
+
+
+<hr>
+
 
 ### Are patients with hypertension and diabetes mellitus at increased risk for COVID-19 infection? 
 
@@ -180,13 +208,22 @@ Ferrario CM, Jessup J, Chappell MC, et al.. Circulation 2005;111:2605-10. <br>
 
 <hr> 
 
-## Safety and Wellness Tips
+# Safety and Wellness Tips
 
 <hr>
 
 <hr>
 
+## Symptoms
+
 <hr>
+
+
+### Clinical characteristics of COVID-19 patients with digestive symptoms in Hubei, China <br>
+
+Source: https://journals.lww.com/ajg/Documents/COVID_Digestive_Symptoms_AJG_Preproof.pdf?fbclid=IwAR3S903mKdYOLGrqrYpiOL8GnGcP2b0r3UnUulJGFeeO_O7pd2RTncE95Tw
+<hr>
+
 
 ### Preventing a covid-19 pandemic
 https://www.bmj.com/content/368/bmj.m810

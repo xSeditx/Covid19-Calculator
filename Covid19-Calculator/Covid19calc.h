@@ -331,7 +331,10 @@ public:
                 TimeSeries_files.push_back(entry.path().string());
             }
         }
-        Time_Series.back().Case_Map[""];
+        if (Time_Series.size())
+        {
+            Time_Series.back().Case_Map[""];
+        }
 
         path = "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/";
         for (const auto & entry : fs::directory_iterator(path))
