@@ -27,7 +27,6 @@ std::string ErrorString[] =
 
 #include"Graphics/Fonts.h"
 
-FontRender *GlobalFont_Renderer;
 
 
 
@@ -173,7 +172,7 @@ class MyApp:
         g_Window().UserInterface.Add(Graph);
 
         set(this);
-        GlobalFont_Renderer = new FontRender("Resources/ArialBlack.ttf");
+        GlobalFont_Renderer = new FontRender("Resources/ArialBlack.ttf", 25);
     }
     virtual void OnMouseMove(Vec2 _position, Vec2 _relative, uint32_t _buttonState) override 
     { // SDL_MOUSEMOTION/

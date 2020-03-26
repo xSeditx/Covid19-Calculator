@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{4a171995-f163-4e5a-b99d-c1329e67c0df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graphics\Headers">
+      <UniqueIdentifier>{bd782242-f732-4988-9174-fa16c8e58e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Covid19calc.h">
@@ -34,43 +37,43 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Application.h">
-      <Filter>Source Files\Graphics</Filter>
+      <Filter>Source Files\Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Camera.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Collider.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Fonts.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GameObject.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GUI.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Image.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderer.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Scene.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Sprite.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Time.h">
-      <Filter>Source Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Window.h">
-      <Filter>Source Files\Graphics</Filter>
+      <Filter>Source Files\Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Common.h">
-      <Filter>Source Files\Graphics</Filter>
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Collider.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Fonts.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GameObject.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GUI.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Image.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Scene.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Sprite.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Time.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Window.h">
+      <Filter>Source Files\Graphics\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +114,9 @@
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Window.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Fonts.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

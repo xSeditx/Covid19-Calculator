@@ -97,6 +97,11 @@ _static bool Renderer::is_Initialize()
 /* Creates and Assigns the main renderer*/
 _static bool Renderer::Initialize(SDL_Window *_win, uint32_t _flags)
 {
-    if (MainContext == nullptr) { MainContext = new Renderer(_win, _flags); }
+    if (!MainContext)
+    { 
+        MainContext = new Renderer(_win, _flags);
+        return true;
+    }
+    return false;
 }
 

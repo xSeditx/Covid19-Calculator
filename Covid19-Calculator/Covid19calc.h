@@ -6,6 +6,7 @@
 #include"FileHandling.h"
 
 #include"Graphics/Application.h"
+
 #include"Graphics/Renderer.h"
 
 /* City State where Outbreak is taking place */
@@ -252,9 +253,9 @@ public:
     {
         if (!Texture)
         {
-            Texture =  SDL_CreateTextureFromSurface(Renderer::get().g_Context(), Renderer::get().g_Surface());
+           Texture =  SDL_CreateTextureFromSurface(Renderer::get().g_Context(), Renderer::get().g_Surface());
         }
-        auto Val = Total_Deaths;
+        auto Val = Total_Infected;
         GlobalFont_Renderer->Write(std::to_string(Val).c_str(), { 3, 3 });
     }
 private:

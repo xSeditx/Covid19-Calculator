@@ -171,6 +171,7 @@
     <ClCompile Include="Graphics\Application.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\Collider.cpp" />
+    <ClCompile Include="Graphics\Fonts.cpp" />
     <ClCompile Include="Graphics\GameObject.cpp" />
     <ClCompile Include="Graphics\GUI.cpp" />
     <ClCompile Include="Graphics\Image.cpp" />
