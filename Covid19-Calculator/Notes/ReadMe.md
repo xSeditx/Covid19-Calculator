@@ -210,6 +210,8 @@ Ferrario CM, Jessup J, Chappell MC, et al.. Circulation 2005;111:2605-10. <br>
 
 [Hydroxychloroquine sulfate Normal treatment 2019 Coronavirus disease ( COVID-19 )patient](chinese.pdf)
 
+[English Translation](chinese.zh-CN.en.pdf)
+
 
 
 
