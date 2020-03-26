@@ -6,7 +6,6 @@ struct Window;
 #include"../Common.h"
 #include"Time.h"
 #include"Window.h"
-#include"GUI.h"
 
 class  EventSystem;
 struct InputDevices
@@ -84,6 +83,15 @@ public:
     static uint32_t g_Error(); 
     static void ClearError();
 
+    static Window& getWindow() { return *get().ApplicationWindow; }
+
+    static Application& get() { return *ActiveApp; }
+    static void set(Application* _app)
+    {
+        ActiveApp = _app;
+    }
+
+    Window& g_Window() { return *ApplicationWindow; }   
 protected:
 
     virtual void OnRun(); /// Differs from start in that it can resume execution; Possibly change to Resume later or something
@@ -103,16 +111,18 @@ protected:
 
     virtual void OnError(uint32_t _code); 
 
-	GUI UserInterface;
+
 
 	float g_Delta() { return DeltaTime / 1000.0f; }
 	std::string Title;
-	Window ApplicationWindow;
-	Timer ApplicationTimer;
 
 	unsigned int LastUpdate = 0.0;
 	float DeltaTime = 0.0f;
 	float FramesPerSecond;
 	float TargetFPS = 16.66f;
 	void s_Framerate(float _fps) { TargetFPS = 1000.0f / _fps; }
+
+	Timer ApplicationTimer;
+	Window *ApplicationWindow;
+    static Application *ActiveApp;
 };

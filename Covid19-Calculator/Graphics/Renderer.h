@@ -31,24 +31,56 @@ public:
 
     void Attach(Scene *_scene);
     void Update(float _deltaTime);
+
     void Render();
 
-    inline SDL_Renderer *g_Context() { return Context; }
-    inline Scene& g_Scene() { return *Level; }
+    /* Gets the SDL Surface for the Renderer */
+    SDL_Surface* g_Surface() { return Surface; };
+    /* Getes the SDL Rendering context for the Renderer */
+    SDL_Renderer *g_Context() { return Context; }
 
-    inline static void set(Renderer *_context) { MainContext = _context; }
-    inline static Renderer &get() { return *MainContext; }
-    inline static bool Initialize(SDL_Window *_win, uint32_t _flags)
-    {
-        if (MainContext == nullptr) { MainContext = new Renderer(_win, _flags); }
-    }
 
-    Scene *Level;
+    /* Sets the Main Renderer */
+    static void set(Renderer *_context);
+    /* Gets the Main Renderer */
+    static Renderer &get();
+    /* Test to see if a Renderer has been Created and set */
+    static bool is_Initialize();  
+    /* Creates and Assigns the main renderer */
+    static bool Initialize(SDL_Window *_win, uint32_t _flags);
+    /* Returns the a pointer to the Entire Scene graph for the Level */
+    Scene& g_Scene() { return *Level; }
+
 private:
+    Scene *Level;
     uint32_t Flags;
     SDL_Renderer *Context;
     static Renderer *MainContext;
 };
 
 
+/// LIKELY IN THE NEAR FUTURE
+/*
 
+
+class Surface
+{
+    Surface(SDL_Window *_window)
+        :
+        Target(_window)
+    {
+        DrawableSurface = SDL_GetWindowSurface(Target);
+        Texture = SDL_CreateTextureFromSurface(Context, SurfaceTexture);
+    }
+
+    SDL_Surface *DrawableSurface;
+    SDL_Texture *SurfacePixels;
+    SDL_Window* Target;
+
+    SDL_Surface& g_Surface() { return DrawableSurface; }
+    SDL_Texture& g_Texture() { return SurfacePixels}
+};
+
+
+
+*/

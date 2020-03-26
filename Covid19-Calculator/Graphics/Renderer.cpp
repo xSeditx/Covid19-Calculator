@@ -83,3 +83,20 @@ idTag Renderer::Add(Sprite *_sprite, uint8_t _layer)
     return results;
 }
 
+
+
+/* Sets the Main Renderer */
+_static void Renderer::set(Renderer *_context) { MainContext = _context; }
+/* Gets the Main Renderer */
+_static Renderer &Renderer::get() { return *MainContext; }
+/* Test to see if a Renderer has been Created and set */
+_static bool Renderer::is_Initialize()
+{
+    return MainContext != nullptr;
+}
+/* Creates and Assigns the main renderer*/
+_static bool Renderer::Initialize(SDL_Window *_win, uint32_t _flags)
+{
+    if (MainContext == nullptr) { MainContext = new Renderer(_win, _flags); }
+}
+

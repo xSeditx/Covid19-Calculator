@@ -5,7 +5,8 @@
 
 #include"FileHandling.h"
 
-
+#include"Graphics/Application.h"
+#include"Graphics/Renderer.h"
 
 /* City State where Outbreak is taking place */
 struct Location_t
@@ -228,6 +229,7 @@ class Epidemic_Map
 public:
     std::vector<Outbreak_info> Outbreak_List;
     std::unordered_map<std::string, std::vector<Outbreak_info>> Outbreak_Map;
+
     size_t Total_Deaths{ 0 };
     size_t Total_Infected{ 0 };
     size_t Total_Recovered{ 0 };
@@ -246,22 +248,32 @@ public:
 
     std::vector<Outbreak_info> search_Place(std::string _location);
 
-
-    private:
-
-        void removeSpaces(std::string& _str)
+    void Render()
+    {
+        if (!Texture)
         {
-            int count = 0;
-            int numSpaces = 0;
-            for (int i = 0; _str[i]; i++)
-            {
-                if (_str[i] != ' ')
-                {
-                    _str[count++] = _str[i];
-                }
-            }
-            _str[count] = '\0';
+            Texture =  SDL_CreateTextureFromSurface(Renderer::get().g_Context(), Renderer::get().g_Surface());
         }
+        auto Val = Total_Deaths;
+        GlobalFont_Renderer->Write(std::to_string(Val).c_str(), { 3, 3 });
+    }
+private:
+
+    void removeSpaces(std::string& _str)
+    {
+        int count = 0;
+        int numSpaces = 0;
+        for (int i = 0; _str[i]; i++)
+        {
+            if (_str[i] != ' ')
+            {
+                _str[count++] = _str[i];
+            }
+        }
+        _str[count] = '\0';
+    }
+
+    SDL_Texture *Texture;
 };
 
 
@@ -273,7 +285,11 @@ struct Daily_Case
     size_t Confirmed;
     size_t Deaths;
     size_t Recovered;
+
+
 };
+
+#include<algorithm>
 
 /* Mapping Specific locations Daily as new cases Emerge */
 struct Daily_Update
@@ -286,6 +302,18 @@ struct Daily_Update
      std::vector<std::pair<Date_t, uint32_t>> Cases;
 
      std::unordered_map< std::string, Daily_Case> Case_Map;
+
+
+// void Render(std::string _place)
+// {
+//
+//     Vec2 Sz = Application::get().g_Window().size();
+//     Vec2 Coef = Sz;
+//    // uint32_t Max = std::max_element(v.begin(), v.end());
+//    // uint32_t Min = std::max_element(v.begin(), v.end());
+//
+//
+// }
 };
 
 /* Total Pandemic as a whole and all the data I have managed to parse so far */

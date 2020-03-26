@@ -25,6 +25,10 @@ std::string ErrorString[] =
 
 #include"JsonParser.h"
 
+#include"Graphics/Fonts.h"
+
+FontRender *GlobalFont_Renderer;
+
 
 
 // https://github.com/Tyyppi77/imgui_sdl
@@ -44,9 +48,20 @@ public:
         :
         Widget_base(_topleft, _size)
     {
-        Xcoef = (_xRange.x - _xRange.y)/ _size.x;
-        Ycoef =( _yRange.x - _yRange.y)/ _size.y;
+        Xcoef = (   _xRange.y - _xRange.x)  / _size.x;
+        Ycoef = (   _yRange.y - _yRange.x)  / _size.y;
     }
+    //  virtual void OnRender() { Print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"); }
+    virtual void OnMouseMove(Vec2 _position, Vec2 _relative, Uint32 _buttonState) {}   // SDL_MOUSEMOTION/
+    virtual void OnMouseButtonDown(Vec2 _positon, uint8_t _button, uint8_t _state, uint8_t _clicks) {} // SDL_MOUSEBUTTONDOWN
+    virtual void OnMouseButtonUp(Vec2 _positon, uint8_t _button, uint8_t _state) {} //SDL_MOUSEBUTTONUP
+    virtual void OnKeyDown(uint32_t _keycode, uint32_t _scancode, uint16_t _mod, uint8_t _repeat) {} //SDL_KEYDOWN
+    virtual void OnKeyUp(uint32_t _keycode, uint32_t _scancode, uint16_t _mod) {}   //SDL_KEYUP
+
+    float Xcoef{ 0.0f }, Ycoef{ 0.0f };
+    std::vector<std::vector<float>> Values;
+    std::vector<Vec3> Colors;
+
     void add_Group(Vec3 _color) 
     {
         Colors.push_back(_color);
@@ -58,18 +73,14 @@ public:
         Values[_group] .push_back(_val);
     }
 
-    float Xcoef{ 0.0f }, Ycoef{ 0.0f };
+    virtual void OnUpdate(SDL_Event &_msg)
+    {
+        Vec2 Pos = Area.RelativePosition + Area.Position;
+        Area.Position = Pos; //
+        Print(Application::get().g_Window().size());
 
-    std::vector<std::vector<float>> Values;
-    std::vector<Vec3> Colors;
-    virtual void OnUpdate(SDL_Event &_msg) {}
-  //  virtual void OnRender() { Print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"); }
-    virtual void OnMouseMove(Vec2 _position, Vec2 _relative, Uint32 _buttonState) {}   // SDL_MOUSEMOTION/
-    virtual void OnMouseButtonDown(Vec2 _positon, uint8_t _button, uint8_t _state, uint8_t _clicks) {} // SDL_MOUSEBUTTONDOWN
-    virtual void OnMouseButtonUp(Vec2 _positon, uint8_t _button, uint8_t _state) {} //SDL_MOUSEBUTTONUP
-    virtual void OnKeyDown(uint32_t _keycode, uint32_t _scancode, uint16_t _mod, uint8_t _repeat) {} //SDL_KEYDOWN
-    virtual void OnKeyUp(uint32_t _keycode, uint32_t _scancode, uint16_t _mod) {}   //SDL_KEYUP
-
+    }
+    /* 
     virtual void OnRender() override
     {
         SDL_Rect R =
@@ -80,21 +91,19 @@ public:
              (int)Area.Size.y
         };
 
-
         SDL_SetRenderDrawColor(Context, 250, 250, 250, 255);
-
-
         SDL_RenderFillRect(Context, &R);
-
 
         for_loop(C, Colors.size())
         {
             SDL_SetRenderDrawColor(Context, Colors[C].x, Colors[C].y, Colors[C].z, 255);
             uint32_t
                 x1 = R.x,
-                y1 = R.h;// -*Values[C].begin();
+                y1 = R.h;
 
             float Xcoef = g_Width() / Values[C].size();
+
+
             for (auto& V : Values[C])
             {
                 uint32_t
@@ -102,59 +111,26 @@ public:
                     py1 = y1;
 
                 x1 += Xcoef;
-                y1 = g_Height() - V;
+                y1 = (g_Height() - V) * Ycoef;
 
                 SDL_RenderDrawLine(Renderer::get().g_Context(), px1, py1, x1, y1);
-
             }
         }
-            // Render the Children of the Window
+
+        // Render the Children of the Window
         for (auto & C : Children)
         {// In Update, Children first, In Render We draw last so they remain ontop
             C->Render();
         }
 
         SDL_SetRenderDrawColor(Context, DEFAULT_DRAW_COLOR);
-
     }
+
+ */
+
 };
 
 
-class MyButton
-    :
-    public Button
-{
-public:
-    MyButton(Vec2 _pos, Vec2 _size)
-        :Button(_pos, _size)
-    {}
-
-    //virtual void OnUpdate(SDL_Event& _msg) override;
-   // virtual void OnRender() override;
-    virtual void OnMouseMove(Vec2 _position, Vec2 _relative, Uint32 _buttonState) override 
-    {
-        Print("Mouse over Button");
-    }
-    virtual void OnMouseButtonDown(Vec2 _positon, uint8_t _button, uint8_t _state, uint8_t _clicks) override
-    {// SDL_MOUSEBUTTONDOWN
-        Print("Mouse click Button");
-
-    } 
-    virtual void OnMouseButtonUp(Vec2 _positon, uint8_t _button, uint8_t _state) override
-    { //SDL_MOUSEBUTTONUP
-        Print("Mouse up Button");
-
-    }
-    virtual void OnKeyDown(uint32_t _keycode, uint32_t _scancode, uint16_t _mod, uint8_t _repeat) override 
-    { //SDL_KEYDOWN
-        Print("keydown Button");
-
-    }
-    virtual void OnKeyUp(uint32_t _keycode, uint32_t _scancode, uint16_t _mod) override
-    {  //SDL_KEYUP
-        Print("Keyup Mouse click Button");
-    } 
-};
 class MyApp:
     public Application
 {
@@ -167,33 +143,37 @@ class MyApp:
     {
         MakeWindow(1280, 960, "Test2");
  
-        Graph_Widget *Graph = new Graph_Widget({ 10,10 }, { 800,500 }, { 0, 100 }, { 0,100 });
+        Graph_Widget *Graph = new Graph_Widget({ 10,10 }, { 1200, 800 }, { 0, 400 }, { 0, 15});
         Graph->add_Group({ 255,0,0 });
-        Graph->add_Group({ 0,255,0 });
-        Graph->add_Group({ 0,0,255 });
 
-        Graph->add_Value(0,100);
-
-        for_loop(i, 100)
-        {
-            Graph->add_Value(0, rand() % (i + 1));
-        }
-        for_loop(i, 100)
-        {
-            Graph->add_Value(1, rand() % (i * 2 + 1));
-        }      
+//        Graph->add_Group({ 0,255,0 });
+//       Graph->add_Group({ 0,0,255 });
+// Graph->add_Value(0,100);
+//
+// for_loop(i, 100)
+// {
+//     Graph->add_Value(0, rand() % (i + 1));
+// }
+// for_loop(i, 100)
+// {
+//     Graph->add_Value(1, rand() % (i * 2 + 1));
+// }      
     
         Total_Pandemic.Retrieve_All_Filenames();
         Total_Pandemic.load_All_Archived();
         Total_Pandemic.load_All_DailyReports();
         for (auto& V : Total_Pandemic.Daily_Reports.back().Outbreak_Map)
         {
-            Graph->add_Value(1, V.second.back().Deaths);
+            for(auto& C:  V.second)
+            Graph->add_Value(0, C.Deaths);
+            Graph->add_Value(0, V.second.back().Deaths);
         }
 
-        UserInterface = GUI("TestGUI");
+        g_Window().UserInterface = GUI("TestGUI");
+        g_Window().UserInterface.Add(Graph);
 
-        UserInterface.Add(Graph);
+        set(this);
+        GlobalFont_Renderer = new FontRender("Resources/ArialBlack.ttf");
     }
     virtual void OnMouseMove(Vec2 _position, Vec2 _relative, uint32_t _buttonState) override 
     { // SDL_MOUSEMOTION/
@@ -217,7 +197,12 @@ class MyApp:
     }
 
     virtual void OnUpdate() {}
-    virtual void OnRender() {}
+    virtual void OnRender() {
+
+        Total_Pandemic.Daily_Reports[0].Render();
+       // GlobalFont_Renderer->Write("Hello", { 3, 3 });
+    
+    }
 
 };
 
@@ -562,3 +547,51 @@ DEATHS
 29  4,128,768‬
 30
  */
+
+
+
+
+
+
+
+
+
+ ///https://www.nytimes.com/interactive/2020/03/21/upshot/coronavirus-deaths-by-country.html
+
+
+class MyButton
+    :
+    public Button
+{
+public:
+    MyButton(Vec2 _pos, Vec2 _size)
+        :Button(_pos, _size)
+    {}
+
+    //virtual void OnUpdate(SDL_Event& _msg) override;
+   // virtual void OnRender() override;
+    virtual void OnMouseMove(Vec2 _position, Vec2 _relative, Uint32 _buttonState) override
+    {
+        Print("Mouse over Button");
+    }
+    virtual void OnMouseButtonDown(Vec2 _positon, uint8_t _button, uint8_t _state, uint8_t _clicks) override
+    {// SDL_MOUSEBUTTONDOWN
+        Print("Mouse click Button");
+
+    }
+    virtual void OnMouseButtonUp(Vec2 _positon, uint8_t _button, uint8_t _state) override
+    { //SDL_MOUSEBUTTONUP
+        Print("Mouse up Button");
+
+    }
+    virtual void OnKeyDown(uint32_t _keycode, uint32_t _scancode, uint16_t _mod, uint8_t _repeat) override
+    { //SDL_KEYDOWN
+        Print("keydown Button");
+
+    }
+    virtual void OnKeyUp(uint32_t _keycode, uint32_t _scancode, uint16_t _mod) override
+    {  //SDL_KEYUP
+        Print("Keyup Mouse click Button");
+    }
+};
+

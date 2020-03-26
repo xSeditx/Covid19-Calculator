@@ -1,8 +1,9 @@
 #pragma once
-#include"Renderer.h"
 
 #include<string>
 #include"../Common.h"
+
+#include"Renderer.h"
 /*
 FONT RENDERER STARTED. NEED TO PLACE ALL THE GIVEN TEXT INTO A STD::VECTOR SO THAT i CAN ASSIGN IT ONCE
 AND SPEED UP THE FONT RENDERING PROCESS.
@@ -25,21 +26,6 @@ class FontRender
 {
 public:
 	FontRender() = default;
-//FontRender(const char*file)
-//{
-//	if (TTF_Init() < 0)
-//	{
-//		Print("Font Initialization Failed");
-//		Print("Error: " << TTF_GetError());
-//	}
-//
-//	CurrentFont = TTF_OpenFont(file, 30);
-//
-//	if (!CurrentFont)
-//	{
-//		Print(TTF_GetError);
-//	}
-//}
 	FontRender(const char*file, int size = 30)
 	{
 		if (TTF_Init() < 0)
@@ -87,14 +73,16 @@ public:
 	}
 	void s_BackGroundColor(SDL_Color col) { BackgroundColor = col; }
 	void s_ForgroundColor(SDL_Color col) { ForgroundColor = col; }
-	void Write(float value, Vec2 pos)
+
+    void Write(float value, Vec2 pos)
 	{
 		std::string Str = std::to_string((int)value);
 		const char* S = Str.c_str();
 
 		Write(S, pos);
 	}
-	void Write(const char *text, Vec2 pos)
+
+ 	void Write(const char *text, Vec2 pos)
 	{
 		float 
 			Width = 0,
@@ -215,6 +203,7 @@ public:
 	private:
 		bool Shadowed;
 };
+extern FontRender *GlobalFont_Renderer;
 
 
 
@@ -245,3 +234,18 @@ public:
 			//SDL_RenderCopy(Renderer::get().g_Context(), mTexture, NULL, &renderQuad);
 			//SDL_DestroyTexture(mTexture);
 
+//FontRender(const char*file)
+//{
+//	if (TTF_Init() < 0)
+//	{
+//		Print("Font Initialization Failed");
+//		Print("Error: " << TTF_GetError());
+//	}
+//
+//	CurrentFont = TTF_OpenFont(file, 30);
+//
+//	if (!CurrentFont)
+//	{
+//		Print(TTF_GetError);
+//	}
+//}

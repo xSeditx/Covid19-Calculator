@@ -202,6 +202,14 @@ Ferrario CM, Jessup J, Chappell MC, et al.. Circulation 2005;111:2605-10. <br>
 
 
 
+<hr>
+
+
+## HydroxyChloroquine is not showing improvement in Covid-19 patients
+<hr>
+
+[Hydroxychloroquine sulfate Normal treatment 2019 Coronavirus disease ( COVID-19 )patient](chinese.pdf)
+
 
 
 

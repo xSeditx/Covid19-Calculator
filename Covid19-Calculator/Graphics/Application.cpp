@@ -8,6 +8,7 @@
 
 #define SHOW_FPS
 _static InputDevices *InputDevices::Active;
+_static Application *Application::ActiveApp;
 
 ///uint32_t ErrorCode = NO_ERROR_LUST;
 
@@ -16,11 +17,10 @@ Application::Application()
 	Title(""),
 	ApplicationTimer(Timer())
 {
- ///   DEBUG_TRACE("Created:");
+    set(ActiveApp);
 }
 Application::~Application()
-{
- ///   DEBUG_TRACE("Deleted:");
+{ 
 }
 
 //=======================================================================================================
@@ -46,11 +46,11 @@ void Application::Start()
 
     //-------------------------------------------------------------------------------------------------------------
     OnCreate();
-    if (ApplicationWindow.Initialized != true)
+    if (!Window::get().is_Initialized())
     {
-        ApplicationWindow = Window(640, 480, "Default Application Window: Create a User Window");
+        ApplicationWindow = new Window(640, 480, "Default Application Window: Create a User Window");
     }
-	ApplicationWindow.s_Position(Vec2(20, 30));
+	ApplicationWindow->s_Position(Vec2(20, 30));
 	//InputDevices::get().Mouse.Hide();
 }
 
@@ -101,9 +101,9 @@ void Application::Update()
 void Application::Render()
 { // Calls User define Application Render function
     OnRender();
-	UserInterface.Render();
-    ApplicationWindow.Sync();
-    ApplicationWindow.CLS(); // Do not like the duel Dereference every single frame Feels unneeded at best
+    g_Window().UserInterface.Render();
+    g_Window().Sync();
+    g_Window().CLS(); // Do not like the duel Dereference every single frame Feels unneeded at best
 }
 
 void Application::OnEnd()    { Print(" Default "); }
@@ -118,26 +118,26 @@ void Application::OnError(uint32_t _code){ Print(" Default ");}
 
 void Application::MakeWindow(int _width, int _height, std::string _name)
 {
-    ApplicationWindow = Window(_width, _height, _name);
+    ApplicationWindow = new Window(_width, _height, _name);
 }
 void Application::ErrorCatch(uint32_t _code)
 {
-    switch (_code)
-    {
-///case LEVEL_ZERO_ERROR:
-///    Print("**WARNING**");
-///    ErrorCode = NO_ERROR_LUST;
-///    break;
-///case LEVEL_ONE_ERROR:
-///    Print("***ERROR***");
-///    OnError(_code);
-///    ErrorCode = NO_ERROR_LUST;
-///    break;
-///case LEVEL_TWO_ERROR:
-///    __debugbreak();
-///    ErrorCode = NO_ERROR_LUST;
-///    break;
-    }
+///    switch (_code)
+///    {
+/// case 0:
+//////    Print("**WARNING**");
+//////    ErrorCode = NO_ERROR_LUST;
+//////    break;
+/// case 1:// LEVEL_ONE_ERROR:
+//////    Print("***ERROR***");
+//////    OnError(_code);
+//////    ErrorCode = NO_ERROR_LUST;
+//////    break;
+/// case 2://LEVEL_TWO_ERROR:
+//////    __debugbreak();
+//////    ErrorCode = NO_ERROR_LUST;
+//////    break;
+///    }
 	//const char *Err = SDL_GetError();
 	//if (Err)
 	//{
@@ -164,7 +164,7 @@ void Application::Run()
 		SDL_Event msg;
 		while (SDL_PollEvent(&msg))
 		{
-			UserInterface.Update(msg);
+			g_Window().UserInterface.Update(msg);
             Print("Msg: " << msg.type);
 			switch (msg.type)
 			{

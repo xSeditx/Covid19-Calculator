@@ -147,7 +147,7 @@ static std::ostream& operator<<(std::ostream &lhv, Vec4 const &rhv)
 
 
 
-#define DEFAULT_DRAW_COLOR  255,255,255,255
+#define DEFAULT_DRAW_COLOR  155,155,155,155
 
 #define Squared(x)   ((x)*(x))
 
