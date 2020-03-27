@@ -67,6 +67,103 @@ void Epidemic_Map::load_Archived_OutbreakData(std::string _filename)
 }
 void Epidemic_Map::load_Daily_OutbreakData(std::string _filename)
 {
+
+    CSV_Parser Parse(_filename);
+    for (auto& P : Parse.Header)
+    {
+        Print(P);
+    }
+
+    for (auto& P : Parse.Parsed_data)
+    { //State,  Country, Last Update, Confirmed, Deaths, Recovered
+
+        Outbreak_info Row_data;
+        std::string DateTimeIN;
+        std::string Long, Lat;
+
+
+
+        if (P[0] != "")
+        {// State
+            Row_data.Place.Province = P[0];
+        }
+        else
+        {
+            Row_data.Place.Province = "N/A";
+        }
+
+        if (P[1] != "")
+        {//  Region
+            Row_data.Place.Region = P[1];
+        }
+        else
+        {
+            Row_data.Place.Region = "N/A";
+        }
+
+
+        if (P[2] != "")
+        {// Date and Time
+            Row_data.Date_Time = Date_t::parse_DateTimeString(P[2]);  // 2
+        }
+        else
+        {
+            Row_data.Date_Time = Date_t();
+        }
+
+
+        if (P[3] != "")
+        {// Confirmed Cases
+            Row_data.Confirmed = std::stoi(P[3]);                     // 3
+        }
+        else
+        {
+            Row_data.Deaths = 0;
+        }
+
+
+        if (P[4] != "")
+        {// Deaths
+            Row_data.Deaths = std::stoi(P[4]);                       // 4
+        }
+        else
+        {
+            Row_data.Deaths = 0;
+        }
+
+        if (P.size() > 5)
+        {
+            if (P[5] != "")
+            {// Recovered
+                Row_data.Recovered = std::stoi(P[5]);                    // 5
+            }
+            else
+            {
+                Row_data.Recovered = 0;
+            }
+        }
+        else
+        {
+            Row_data.Recovered = 0;
+        }
+
+
+        if (P.size() > 6)
+        {// If there is more data it is Long/Lat Data
+            Row_data.Place.Longitude = std::stof(P[6]);           //6
+            Row_data.Place.Latitude  = std::stof(P[7]);           //7
+        }
+        else
+        {// No Long and Lat data present
+            Row_data.Place.Longitude = 0;            //6
+            Row_data.Place.Latitude  = 0;            //7
+        }
+    }
+
+
+
+
+/*
     try {
         io::CSVReader<8, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_filename);
         in.read_header
@@ -164,7 +261,7 @@ void Epidemic_Map::load_Daily_OutbreakData(std::string _filename)
         }
 
     }
-
+  */
 }
 
 

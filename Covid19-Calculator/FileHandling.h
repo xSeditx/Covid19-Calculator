@@ -23,6 +23,7 @@ struct File_t
         Filename = Fp.filename().string();
         Filepath = Fp.parent_path().string();
         Extension = Fp.extension().string();
+        FileStream.clear();
     }
 
     /* Opens the Associated File */
@@ -83,20 +84,28 @@ private:
 
 //std::string Head;// = CSVFile.read_Line();
 
+
+/* ==================================================== 
+    Open and Parse a CSV file seperating the Columns 
+    into a Vector as a set of strings. 
+    ~* WARNING *~ 
+    It's the users responsibility to know the format
+    of the string to convert it to being string, int,
+    or float.
+    ==================================================== */
 class CSV_Parser
 {
 public:
+        std::vector<std::string> Lines;
 
-    File_t CSVFile;
     CSV_Parser(std::string _file)
     {
         CSVFile = File_t(_file);
         std::string Line;
-
         /* Gets the Header Information */
         CSVFile.read_Line(Line);
         Header = parse_Line(Line);
-
+        Column_count = Header.size();
         /* Extracts all the Lines from the File */
         while (CSVFile.read_Line(Line)) 
         {
@@ -110,6 +119,7 @@ public:
         }
     }
 
+    /* Properly parse a row with a Quoted Comma */
     std::string parse_quote(std::string &_input)
     {
         std::string result;
@@ -133,6 +143,7 @@ public:
         return result;
     }
 
+    /* Split the string returning the ripped off portion and the remainder in Input */
     std::string split_str(std::string &_input, char _delim = ',')
     {
         std::string result;
@@ -141,14 +152,13 @@ public:
 
         size_t End = _input.find(_delim, 1);
         Field_Length = End;
- 
+
         result = _input.substr(0, Field_Length);
         if (result.find('"') != std::string::npos)
-        {
+        {// If there is Quotation mark we must seperate it
             result = parse_quote(_input);
             size_t Next = _input.find(_delim, 0) + 1;
             _input = _input.substr(Next);
-
             return result;
         }
         size_t Next = _input.find(_delim, 0) + 1;
@@ -156,32 +166,37 @@ public:
         _input = _input.substr(Next);
 
         if (End == std::string::npos)
-        {
+        {// Returns a string that signals the end of the line for Parse
             result = _input;
-            _input = "EOL";
+            _input = "[EOL]";
         }
         return result;
     }
 
+    /* Parses the line returning a Vector of the Values as strings */
     std::vector<std::string> parse_Line(std::string _line)
     {
         std::vector<std::string> result;
-        std::string Field;
 
         size_t Start = _line.find(',', 0);
 
-        while ( _line != "EOL")
+        while ( _line != "[EOL]")
         {// Keep going until we read end of Line
-            result.push_back(split_str(_line));
+            std::string PushLine = split_str(_line);
+            if (PushLine == ",")
+            {
+                PushLine = "";
+            }
+            result.push_back(PushLine);
         }
         return result;
     }
 
 
-    std::vector<std::string> Header;
-    std::vector<std::string> Rows;
-    std::vector<std::string> Lines;
+    File_t CSVFile;
+    uint32_t Column_count;
 
+    std::vector<std::string> Header;
     std::vector< std::vector<std::string>> Parsed_data;
 };
  

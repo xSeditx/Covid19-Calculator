@@ -113,22 +113,46 @@ Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4651552/
 <br>
 Source: https://www.thelancet.com/pdfs/journals/lanres/PIIS2213-2600(20)30116-8.pdf
 
+<hr>
 
 ### Structure-Based Discovery of a Novel Angiotensin-Converting Enzyme 2 Inhibitor
+
 ```
+
 Abstract
 Angiotensin-converting enzyme 2 (ACE2) is considered an important therapeutic target for controlling cardiovascular diseases and severe acute respiratory syndrome (SARS) outbreaks. Recently solved high-resolution crystal structures of the apo-bound and inhibitor-bound forms of ACE2 have provided the basis for a novel molecular docking approach in an attempt to identify ACE2 inhibitors and compounds that block SARS coronavirus spike protein-mediated cell fusion. In this study, ≈140 000 small molecules were screened by in silico molecular docking. In this structure-activity relation study, the molecules with the highest predicted binding scores were identified and assayed for ACE2 enzymatic inhibitory activity and for their ability to inhibit SARS coronavirus spike protein-mediated cell fusion. This approach identified N-(2-aminoethyl)-1 aziridine-ethanamine as a novel ACE2 inhibitor that also is effective in blocking the SARS coronavirus spike protein-mediated cell fusion. Thus, the molecular docking approach resulting in the inhibitory capacity of N-(2-aminoethyl)-1 aziridine-ethanamine provides an attractive small molecule lead compound on which the development of more effective therapeutic agents could be developed to modulate hypertension and for controlling SARS infections.
 
 ```
+
 Source: https://www.ahajournals.org/doi/10.1161/01.HYP.0000146120.29648.36 <br>
+
+
 
 <hr>
 
+### Inhibition of Angiotensin-Converting Enzyme Activity by Flavonoids: Structure-Activity Relationship Studies
+
+<hr>
+
+```
+
+Previous studies have demonstrated that certain flavonoids can have an inhibitory effect on angiotensin-converting enzyme (ACE) activity, which plays a key role in the regulation of arterial blood pressure. In the present study, 17 flavonoids belonging to five structural subtypes were evaluated in vitro for their ability to inhibit ACE in order to establish the structural basis of their bioactivity. The ACE inhibitory (ACEI) activity of these 17 flavonoids was determined by fluorimetric method at two concentrations (500 µM and 100 µM). Their inhibitory potencies ranged from 17 to 95% at 500 µM and from 0 to 57% at 100 µM. In both cases, the highest ACEI activity was obtained for luteolin. Following the determination of ACEI activity, the flavonoids with higher ACEI activity (i.e., ACEI >60% at 500 µM) were selected for further IC50 determination. The IC50 values for luteolin, quercetin, rutin, kaempferol, rhoifolin and apigenin K were 23, 43, 64, 178, 183 and 196 µM, respectively. Our results suggest that flavonoids are an excellent source of functional antihypertensive products. Furthermore, our structure-activity relationship studies show that the combination of sub-structures on the flavonoid skeleton that increase ACEI activity is made up of the following elements: (a) the catechol group in the B-ring, (b) the double bond between C2 and C3 at the C-ring, and (c) the cetone group in C4 at the C-ring. Protein-ligand docking studies are used to understand the molecular basis for these results.
+
+```
+
+Source: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3504033/
+
+
+
+
+<hr>
 
 ### A pan-coronavirus fusion inhibitor targeting the HR1 domain of human coronavirus spike  
+
 <br>
 
-``` 
+```
+
 Abstract
 Continuously emerging highly pathogenic human coronaviruses (HCoVs) remain a major threat to human health, as illustrated in past SARS-CoV and MERS-CoV outbreaks. The development of a drug with broad-spectrum HCoV inhibitory activity would address this urgent unmet medical need. Although previous studies have suggested that the HR1 of HCoV spike (S) protein is an important target site for inhibition against specific HCoVs, whether this conserved region could serve as a target for the development of broad-spectrum pan-CoV inhibitor remains controversial. Here, we found that peptide OC43-HR2P, derived from the HR2 domain of HCoV-OC43, exhibited broad fusion inhibitory activity against multiple HCoVs. EK1, the optimized form of OC43-HR2P, showed substantially improved pan-CoV fusion inhibitory activity and pharmaceutical properties. Crystal structures indicated that EK1 can form a stable six-helix bundle structure with both short α-HCoV and long β-HCoV HR1s, further supporting the role of HR1 region as a viable pan-CoV target site.
 

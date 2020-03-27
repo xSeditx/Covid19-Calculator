@@ -1,12 +1,11 @@
 #pragma once
+#include<algorithm>
 
 #include"Common.h"
+
 #include"csv.h"
-
 #include"FileHandling.h"
-
 #include"Graphics/Application.h"
-
 #include"Graphics/Renderer.h"
 
 /* City State where Outbreak is taking place */
@@ -37,6 +36,7 @@ struct Location_t
     bool has_Region()   { return (  Region == "" ||   Region == " "); }
 };
 std::ostream& operator <<(std::ostream& _str, Location_t _place);
+
 
 
 /* Year / Day / Month : Time Data */
@@ -160,41 +160,6 @@ struct Date_t
 std::ostream& operator <<(std::ostream& _str, Date_t _time);
 
 
-/* User configuration Location name and GeoLocation
-   TODO: Set Update Frequency */
-struct Configuration
-{
-    Configuration(std::string _file)
-    {
-        io::CSVReader<4, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_file);
-        in.read_header
-        (
-            io::ignore_extra_column,/// io::ignore_no_column , ///
-            "Province/State",
-            "Country/Region",
-            "Latitude",
-            "Longitude"
-        );
-
-        std::string DateTimeIN;
-        std::string Long, Lat;
-
-        while (
-            in.read_row(
-                User_Location.Province,
-                User_Location.Region,
-                Long,
-                Lat))
-        {
-           // User_Location.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
-            User_Location.Longitude = std::stof(Long);
-            User_Location.Latitude = std::stof(Lat);
-        }
-    }
-    Location_t User_Location;
-};
-extern Configuration Config;
-
 
 /* Location / Confirmed Cases / Deaths / Recovered :  Date data*/
 struct Outbreak_info
@@ -223,6 +188,8 @@ struct Outbreak_info
     Date_t     Date_Time;
 };
 std::ostream& operator <<(std::ostream& _str, Outbreak_info _time);
+
+
 
 /* Mapping a Snapshot at a Specific Time of the Outbreak */
 class Epidemic_Map
@@ -255,8 +222,13 @@ public:
         {
            Texture =  SDL_CreateTextureFromSurface(Renderer::get().g_Context(), Renderer::get().g_Surface());
         }
-        auto Val = Total_Infected;
-        GlobalFont_Renderer->Write(std::to_string(Val).c_str(), { 3, 3 });
+        std::string RenderedText =
+            (
+                "Total Infected: " + std::to_string(Total_Infected) + "\n" +
+                "Total Deaths: " + std::to_string(Total_Deaths) + "\n" +
+                "Total Recovered: " + std::to_string(Total_Recovered)
+                );
+        GlobalFont_Renderer->Write(RenderedText.c_str(), { 3, 3 });
     }
 private:
 
@@ -290,7 +262,7 @@ struct Daily_Case
 
 };
 
-#include<algorithm>
+
 
 /* Mapping Specific locations Daily as new cases Emerge */
 struct Daily_Update
@@ -303,19 +275,9 @@ struct Daily_Update
      std::vector<std::pair<Date_t, uint32_t>> Cases;
 
      std::unordered_map< std::string, Daily_Case> Case_Map;
-
-
-// void Render(std::string _place)
-// {
-//
-//     Vec2 Sz = Application::get().g_Window().size();
-//     Vec2 Coef = Sz;
-//    // uint32_t Max = std::max_element(v.begin(), v.end());
-//    // uint32_t Min = std::max_element(v.begin(), v.end());
-//
-//
-// }
 };
+
+
 
 /* Total Pandemic as a whole and all the data I have managed to parse so far */
 class Pandemic_Map
@@ -339,11 +301,12 @@ public:
     /* C:\Users\curti\source\repos\Covid19-Calculator\Covid19-Calculator\COVID-19\who_covid_19_situation_reports\who_covid_19_sit_rep_time_series */
 
     void Retrieve_All_Filenames()
-    {
-        std::string path = "COVID-19/archived_data/archived_daily_case_updates/";
+    {// Hard coded structure of the Repository. We check the known paths and return all CSV files in said directory
+        std::string
+        path = "COVID-19/archived_data/archived_daily_case_updates/";
         for (const auto & entry : fs::directory_iterator(path))
-        {
-            auto P = fs::path(entry.path()).extension();
+        {// Gets all the Filenames in the Daily Case Folder
+
             if (entry.path().extension() == ".csv")
             {
                 ArchivedData_files.push_back(entry.path().string());
@@ -351,33 +314,74 @@ public:
         }
 
                
-        path = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/";            //COVID-19/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/";
+        path = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/";         
         for (const auto & entry : fs::directory_iterator(path))
-        {
-            auto P = fs::path(entry.path()).extension();
+        {// Loads all Time Series CSV files
+
             if (entry.path().extension() == ".csv")
             {
                 TimeSeries_files.push_back(entry.path().string());
             }
         }
         if (Time_Series.size())
-        {
+        {// Checks to see if Time Series exist and places blank to avoid error
             Time_Series.back().Case_Map[""];
         }
 
+
         path = "COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/";
         for (const auto & entry : fs::directory_iterator(path))
-        {
-            auto P = fs::path(entry.path()).extension();
+        {// Loads all Daily Reports
+
             if (entry.path().extension() == ".csv")
             {
                 DailyReport_files.push_back(entry.path().string());
             }
         }
-    }
+    }// Retrieve_All_Filenames
 };
 
 
+
+
+
+
+
+
+/* User configuration Location name and GeoLocation
+   TODO: Set Update Frequency */
+struct Configuration
+{
+    Configuration(std::string _file)
+    {
+        io::CSVReader<4, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '"'>> in(_file);
+        in.read_header
+        (
+            io::ignore_extra_column, /// io::ignore_no_column , ///
+            "Province/State",
+            "Country/Region",
+            "Latitude",
+            "Longitude"
+        );
+
+        std::string DateTimeIN;
+        std::string Long, Lat;
+
+        while (
+            in.read_row(
+                User_Location.Province,
+                User_Location.Region,
+                Long,
+                Lat))
+        {
+            // User_Location.Date_Time = Date_t::parse_DateTimeString(DateTimeIN);
+            User_Location.Longitude = std::stof(Long);
+            User_Location.Latitude = std::stof(Lat);
+        }
+    }
+    Location_t User_Location;
+};
+extern Configuration Config;
 
 
 /* ======================================================================================================================
